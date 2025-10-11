@@ -51,8 +51,8 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Right CTA Button */}
-        <div className="hidden md:flex items-center">
+        {/* Right CTA Buttons */}
+       
           <button
             className="bg-gradient-to-r from-[#00aaff] to-[#0077ff] text-white text-sm font-semibold 
                        px-5 py-2 rounded-md shadow-md hover:shadow-lg hover:scale-[1.03] 
@@ -60,7 +60,7 @@ export default function Navbar() {
           >
             DOWNLOAD PROFILE
           </button>
-        </div>
+        
 
         {/* Mobile Menu Button */}
         <button
@@ -95,10 +95,13 @@ export default function Navbar() {
               ))}
             </ul>
 
-            {/* Mobile CTA Button */}
-            <div className="mt-6">
+            {/* Mobile CTA Buttons */}
+            <div className="mt-6 flex flex-col gap-3">
+          
+
+
               <button
-                className="w-full bg-gradient-to-r from-[#00aaff] to-[#0077ff] text-white text-sm font-semibold 
+                className="w-3/4 bg-gradient-to-r from-[#00aaff] to-[#0077ff] text-white text-sm font-semibold 
                            px-5 py-2 rounded-md shadow-md hover:shadow-lg hover:scale-[1.02] 
                            transition-all duration-300 focus:ring-2 focus:ring-[#00aaff]/50 focus:outline-none"
               >

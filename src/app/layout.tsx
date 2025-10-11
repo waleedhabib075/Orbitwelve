@@ -2,15 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import { Hero } from "@/components/heros";
-import AboutSection from "@/components/AboutSection";
-import PurposeSection from "@/components/PurposeSection";
-import OurServices from "@/components/OurServices";
-import ClientsSection from "@/components/ClientsSection";
-import LatestWorkSection from "@/components/LatestWorkSection";
-import TeamSection from "@/components/TeamPage";
-import FindUsSection from "@/components/FindUsSection";
-import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 const geistSans = Geist({
@@ -24,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "orbitwelve",
-  description: "orbitwelve",
+  title: "OrbitTwelve - Digital Innovation & Growth",
+  description: "Transforming businesses through innovative digital solutions and strategic growth initiatives.",
 };
 
 export default function RootLayout({
@@ -35,22 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-        <Navbar/>
-        {children}
-        <Hero />
-        <AboutSection/>
-        <PurposeSection/>
-        <OurServices/>
-        <ClientsSection/>
-        <LatestWorkSection/>
-        <TeamSection/>
-        <FindUsSection/>
-        <ContactSection/>
-        <Footer/> 
-
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Navbar />
+        <main>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

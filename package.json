@@ -2,6 +2,7 @@
   "name": "orbitwelve",
   "version": "0.1.0",
   "private": true,
+  
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
@@ -10,6 +11,7 @@
   },
   "dependencies": {
     "@tailwindplus/elements": "^1.0.17",
+    "@upstash/redis": "^1.35.5",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.545.0",
     "next": "15.5.4",
