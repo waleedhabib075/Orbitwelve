@@ -6,7 +6,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/f
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12 px-6">
+    <footer className="bg-white text-white py-12 px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -16,14 +16,14 @@ export default function Footer() {
       >
         {/* Logo */}
         <img
-          src="/headerLogo.png" // 👈 Replace this with your logo file path
+          src="/footerlogo.png" // 👈 Replace this with your logo file path
           alt="Footer Logo"
           width={200}
           height={200}
         />
 
         {/* Tagline */}
-        <p className="text-gray-300 text-lg font-medium max-w-md leading-relaxed">
+        <p className="text-black text-lg font-medium max-w-md leading-relaxed">
           We help brands speak human in a <span className="text-[#00aaff] font-semibold">DIGITAL WORLD</span>
         </p>
 

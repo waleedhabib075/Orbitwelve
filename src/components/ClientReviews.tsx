@@ -38,7 +38,7 @@ export default function ClientReviews({ reviews }: ClientReviewsProps) {
           className="text-center mb-14"
         >
           <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
-            💬 What Our Clients Say
+           What Our Clients Say
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Real feedback from our amazing clients around the world who trusted us with their brand vision.
