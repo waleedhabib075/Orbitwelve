@@ -1,5 +1,6 @@
 "use client";
 
+import ImageSlider from "./ImageSlider";
 import { ScrollIndicator } from "./ScrollIndicator";
 
 export function Hero() {
@@ -12,12 +13,7 @@ export function Hero() {
       id="hero"
     >
       {/* Background image */}
-      <img
-        src="/hero.jpg"
-        alt="Yellow mug with steam forming birds on a blue background"
-        className="absolute inset-0 size-full object-cover"
-        fetchPriority="high"
-      />
+      <ImageSlider/>
 
       {/* Overlay gradient for better text contrast */}
       <div

@@ -29,10 +29,10 @@ export default function LatestWorkSection({ projects }: LatestWorkSectionProps) 
   }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-0 bg-transparent">
       <div className="container mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-14">
+        {/* Header - Hidden since we have it in the page hero */}
+        <div className="hidden">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
           Our Latest Work
           </h2>
@@ -43,65 +43,68 @@ export default function LatestWorkSection({ projects }: LatestWorkSectionProps) 
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
           {categories.map((category) => (
-            <button
+            <motion.button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium shadow-sm transition-all duration-200 ${
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-full text-sm font-semibold shadow-lg transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-[#00aaff] text-white shadow-md scale-105"
-                  : "bg-white text-gray-700 border border-gray-200 hover:bg-blue-50 hover:text-[#00aaff]"
+                  ? "bg-gradient-to-r from-[#00aaff] to-[#1098D5] text-white shadow-xl scale-105"
+                  : "bg-white/90 backdrop-blur-sm text-gray-700 border border-gray-200/50 hover:bg-white hover:text-[#00aaff] hover:shadow-md"
               }`}
             >
               {category}
-            </button>
+            </motion.button>
           ))}
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-700"
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{ y: -8 }}
+              className="group relative rounded-3xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100/50"
             >
               {/* Image container */}
-              <div className="relative w-full h-[260px] sm:h-[300px] overflow-hidden">
+              <div className="relative w-full h-[280px] sm:h-[320px] overflow-hidden">
                 <motion.img
                   src={project.imageUrl}
                   alt={project.name}
                   initial={{ scale: 1 }}
-                  whileHover={{ scale: 1.15 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = "/placeholder-project.jpg";
                   }}
-                  className="w-full h-full object-cover transition-transform duration-700"
+                  className="w-full h-full object-cover transition-transform duration-500"
                 />
 
-                {/* Dark glass overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                {/* Enhanced glass overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
 
-                {/* Text slide-up */}
-                <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700">
-                  <h3 className="text-white text-xl font-semibold mb-2 tracking-wide">
+                {/* Text slide-up with better styling */}
+                <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <h3 className="text-white text-xl font-bold mb-3 tracking-wide drop-shadow-lg">
                     {project.name}
                   </h3>
                   {project.category && (
-                    <span className="inline-block bg-white/20 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+                    <span className="inline-block bg-gradient-to-r from-[#00aaff]/80 to-[#1098D5]/80 text-white text-xs px-4 py-2 rounded-full backdrop-blur-sm font-medium shadow-lg">
                       {project.category}
                     </span>
                   )}
                 </div>
 
-                {/* “View Project” floating badge */}
-                <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-md text-gray-800 text-sm font-medium px-4 py-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-700">
+                {/* Enhanced "View Project" floating badge */}
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md text-gray-800 text-sm font-semibold px-5 py-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500 border border-white/20">
                   View Project →
                 </div>
               </div>

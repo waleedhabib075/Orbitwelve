@@ -11,12 +11,12 @@ import FindUsSection from "@/components/FindUsSection";
 import ContactSection from "@/components/ContactSection";
 
 export default async function Home() {
-  // Fetch all data in parallel
+  // Fetch all data in parallel with error handling
   const [clients, reviews, projects, team] = await Promise.all([
-    getClients(),
-    getReviews(),
-    getProjects(),
-    getTeam(),
+    getClients().catch(() => []),
+    getReviews().catch(() => []),
+    getProjects().catch(() => []),
+    getTeam().catch(() => []),
   ]);
 
   return (
@@ -27,8 +27,8 @@ export default async function Home() {
       <OurServices />
       <ClientsSection clients={clients} />
       <ClientReviews reviews={reviews} />
-      <LatestWorkSection projects={projects} />
-      <TeamSection team={team} />
+      {/* <LatestWorkSection projects={projects} /> */}
+      {/* <TeamSection team={team} /> */}
       <FindUsSection />
       <ContactSection />
     </>

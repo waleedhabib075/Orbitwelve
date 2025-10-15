@@ -15,10 +15,10 @@ export default function Navbar() {
     { href: "#about", label: "ABOUT" },
     { href: "#services", label: "SERVICES" },
     { href: "#clients", label: "CLIENTS" },
-    { href: "#work", label: "WORK" },
-    { href: "#team", label: "TEAM" },
+    { href: "/projects", label: "WORK" },
+    // { href: "#team", label: "TEAM" },
     { href: "#blog", label: "BLOG" },
-    { href: "#careers", label: "CAREERS" },
+    // { href: "#careers", label: "CAREERS" },
     { href: "#contact", label: "CONTACT" },
   ];
 
@@ -29,15 +29,15 @@ export default function Navbar() {
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src="/headerLogo.png"
-            width={130}
-            height={40}
-            alt="Orbitwelve"
+            width={180}
+            height={100}
+            alt="Orbtwelve"
             priority
           />
         </Link>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+        <ul className="hidden md:flex items-center space-x-8   text-sm font-medium tracking-wide">
           {navLinks.map(({ href, label }) => (
             <li key={label}>
               <Link
@@ -54,8 +54,8 @@ export default function Navbar() {
         {/* Right CTA Buttons */}
        
           <button
-            className="bg-gradient-to-r from-[#00aaff] to-[#0077ff] text-white text-sm font-semibold 
-                       px-5 py-2 rounded-md shadow-md hover:shadow-lg hover:scale-[1.03] 
+            className="bg-[#1098D5] text-white text-sm font-semibold 
+                       px-5 py-2  shadow-md hover:shadow-lg hover:scale-[1.03] 
                        transition-all duration-300 focus:ring-2 focus:ring-[#00aaff]/50 focus:outline-none"
           >
             DOWNLOAD PROFILE
@@ -65,7 +65,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden flex items-center justify-center p-2 rounded-md hover:bg-white/10 transition"
+          className="md:hidden flex items-center justify-center p-2 hover:bg-white/10 transition"
         >
           {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -101,8 +101,8 @@ export default function Navbar() {
 
 
               <button
-                className="w-3/4 bg-gradient-to-r from-[#00aaff] to-[#0077ff] text-white text-sm font-semibold 
-                           px-5 py-2 rounded-md shadow-md hover:shadow-lg hover:scale-[1.02] 
+                className="w-3/4 bg-[#1098D5] text-white text-sm font-semibold 
+                           px-5 py-2  shadow-md hover:shadow-lg hover:scale-[1.02] 
                            transition-all duration-300 focus:ring-2 focus:ring-[#00aaff]/50 focus:outline-none"
               >
                 DOWNLOAD PROFILE
