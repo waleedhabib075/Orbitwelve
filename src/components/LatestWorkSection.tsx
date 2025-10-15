@@ -34,7 +34,7 @@ export default function LatestWorkSection({ projects }: LatestWorkSectionProps) 
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-            ✨ Our Latest Work
+          Our Latest Work
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Explore our recent projects that blend creativity, strategy, and technology
