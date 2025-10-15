@@ -9,6 +9,10 @@ const nextConfig = {
       },
     ],
   },
+  // ✅ Explicitly disable Turbopack for production builds
+  experimental: {
+    turbo: false,
+  },
 };
 
 module.exports = nextConfig;
