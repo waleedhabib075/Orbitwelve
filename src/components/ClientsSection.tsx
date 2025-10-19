@@ -63,41 +63,39 @@ export default function ClientsSection({ clients }: ClientsSectionProps) {
         </motion.p>
       </div>
 
-      {/* Auto-Scrolling Logos */}
-      <div className="relative w-full overflow-hidden">
-        <motion.div
-          className="flex space-x-12 md:space-x-20"
-          animate={{
-            x: ["0%", "-100%"],
-          }}
-          transition={{
-            ease: "linear",
-            duration: 40,
-            repeat: Infinity,
-          }}
-        >
-          {[...clients, ...clients].map((client, idx) => (
-            <div
-              key={idx}
-              className="flex-shrink-0 flex flex-col items-center justify-center text-center min-w-[140px] md:min-w-[180px]"
+      {/* Client Logos Grid */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-12">
+          {clients.map((client, idx) => (
+            <motion.div
+              key={client.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: (idx % 5) * 0.1 }}
+              className="flex flex-col items-center justify-center text-center"
             >
-              <div className="w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-white shadow-md border border-gray-100 flex items-center justify-center hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <div className="w-full max-w-[160px] h-32 bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 flex items-center justify-center p-4 transition-all duration-300 transform hover:-translate-y-1">
                 <Image
                   src={client.logoUrl || "/placeholder-logo.png"}
                   alt={client.name}
-                  width={96}
-                  height={96}
-                  className="object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  width={120}
+                  height={80}
+                  className="object-contain max-h-16 md:max-h-20 grayscale hover:grayscale-0 transition-all duration-500"
+                  style={{ filter: 'grayscale(100%)' }}
                   unoptimized
                 />
               </div>
               <p className="mt-4 text-sm md:text-base font-medium text-gray-700">
                 {client.name}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
+
+      {/* View All Testimonials Button */}
+     
     </section>
   );
 }
