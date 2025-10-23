@@ -1,11 +1,10 @@
-import type { NextConfig } from 'next';
-import type { Configuration as WebpackConfig } from 'webpack';
+import type { NextConfig } from "next";
+import type { Configuration as WebpackConfig } from "webpack";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  // Disable image optimization during export
+  output: "export", // 👈 this replaces `next export`
   images: {
-    unoptimized: true,
+    unoptimized: true, // 👈 required for static export
     remotePatterns: [
       {
         protocol: "https",
@@ -16,20 +15,18 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.tile.openstreetmap.org",
       },
-    ]
+    ],
   },
   eslint: {
-    // ✅ Don't block builds because of lint errors
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // 👈 optional but good for deployment
   },
   webpack: (config: WebpackConfig, { isServer }: { isServer: boolean }) => {
-    // Fixes npm packages that depend on `fs` module
     if (!isServer && config.resolve) {
       config.resolve = {
         ...config.resolve,
         fallback: {
           ...config.resolve.fallback,
-          fs: false,
+          fs: false, // 👈 disable node fs on client
         },
       };
     }
@@ -37,4 +34,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
