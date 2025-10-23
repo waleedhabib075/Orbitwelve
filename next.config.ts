@@ -1,8 +1,11 @@
-import type { Configuration as WebpackConfig } from 'webpack';
 import type { NextConfig } from 'next';
+import type { Configuration as WebpackConfig } from 'webpack';
 
 const nextConfig: NextConfig = {
+  output: 'export',
+  // Disable image optimization during export
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -13,8 +16,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.tile.openstreetmap.org",
       },
-    ],
-    unoptimized: true, // Disable image optimization for map tiles
+    ]
   },
   eslint: {
     // ✅ Don't block builds because of lint errors

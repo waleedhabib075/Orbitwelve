@@ -1,8 +1,12 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -29,6 +33,11 @@ export default function Footer() {
             We help brands speak human in a{" "}
             <span className="text-[#00aaff] font-semibold">Digital World</span>
           </p>
+
+          <h2 className="text-[#051c27] text-sm font-medium max-w-md leading-relaxed tracking-wide ">
+            team@orbitwelve.com <span className="hidden md:inline"> | </span>
+            +923299711113
+          </h2>
 
           {/* Social Icons */}
           <div className="flex space-x-6 mt-4">

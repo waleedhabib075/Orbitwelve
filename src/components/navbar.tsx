@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,10 +14,10 @@ export default function Navbar() {
   const navLinks = [
     { href: "#about", label: "ABOUT" },
     { href: "#services", label: "SERVICES" },
-    { href: "#clients", label: "CLIENTS" },
-    { href: "/projects", label: "WORK" },
+    { href: "/clients", label: "REVIEWS" },
+    // { href: "/projects", label: "WORK" },
     // { href: "#team", label: "TEAM" },
-    { href: "#blog", label: "BLOG" },
+    // { href: "/blog", label: "BLOG" },
     // { href: "#careers", label: "CAREERS" },
     { href: "#contact", label: "CONTACT" },
   ];
@@ -40,10 +40,7 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center space-x-8   text-sm font-medium tracking-wide">
           {navLinks.map(({ href, label }) => (
             <li key={label}>
-              <Link
-                href={href}
-                className="relative group transition-colors"
-              >
+              <Link href={href} className="relative group transition-colors">
                 <span className="hover:text-[#00aaff]">{label}</span>
                 <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-[#00aaff] transition-all duration-300 group-hover:w-full" />
               </Link>
@@ -52,15 +49,14 @@ export default function Navbar() {
         </ul>
 
         {/* Right CTA Buttons */}
-       
-          <button
+
+        {/* <button
             className="bg-[#1098D5] text-white text-sm font-semibold 
                        px-5 py-2  shadow-md hover:shadow-lg hover:scale-[1.03] 
                        transition-all duration-300 focus:ring-2 focus:ring-[#00aaff]/50 focus:outline-none"
           >
             DOWNLOAD PROFILE
-          </button>
-        
+          </button> */}
 
         {/* Mobile Menu Button */}
         <button
@@ -97,16 +93,13 @@ export default function Navbar() {
 
             {/* Mobile CTA Buttons */}
             <div className="mt-6 flex flex-col gap-3">
-          
-
-
-              <button
+              {/* <button
                 className="w-3/4 bg-[#1098D5] text-white text-sm font-semibold 
                            px-5 py-2  shadow-md hover:shadow-lg hover:scale-[1.02] 
                            transition-all duration-300 focus:ring-2 focus:ring-[#00aaff]/50 focus:outline-none"
               >
                 DOWNLOAD PROFILE
-              </button>
+              </button> */}
             </div>
           </motion.div>
         )}
