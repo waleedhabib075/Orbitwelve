@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -23,7 +23,11 @@ export default function ContactSection() {
     "Branding",
   ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -50,9 +54,11 @@ export default function ContactSection() {
         <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
           Get In Touch
         </h2>
+
         <div className="w-20 h-1 bg-[#00aaff] mx-auto mt-4 rounded-full" />
         <p className="mt-6 text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Have a project you’re interested in discussing with us? Fill out the form below — we’d love to talk!
+          Have a project you’re interested in discussing with us? Fill out the
+          form below — we’d love to talk!
         </p>
       </motion.div>
 

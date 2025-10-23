@@ -1,18 +1,28 @@
 import LatestWorkSection from "@/components/LatestWorkSection";
-import { getProjects, Project } from "@/lib/public-api";
+import { Project } from "@/lib/public-api";
 
-export default async function ProjectsPage() {
-  let projects: Project[] = [];
+// Static project data for static export
+const staticProjects: Project[] = [
+  {
+    id: "1",
+    name: "E-commerce Platform",
+    imageUrl: "/project1.jpg",
+  },
+  {
+    id: "2",
+    name: "Mobile Banking App",
+    imageUrl: "/project2.jpg",
+  },
+  {
+    id: "3",
+    name: "AI Analytics Dashboard",
+    imageUrl: "/project3.jpg",
+  },
+];
 
-  try {
-    const [fetchedProjects] = await Promise.all([
-      getProjects(),
-    ]);
-    projects = fetchedProjects;
-  } catch (error) {
-    console.error('Failed to fetch projects:', error);
-    // projects remains empty array, will be handled by LatestWorkSection
-  }
+export default function ProjectsPage() {
+  // Use static data for static export
+  const projects = staticProjects;
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Hero Section */}
@@ -22,15 +32,21 @@ export default async function ProjectsPage() {
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-5xl font-bold tracking-tight text-white sm:text-7xl">
               Our
-              <span className="bg-gradient-to-r from-[#00aaff] to-[#1098D5] bg-clip-text text-transparent"> Latest Work</span>
+              <span className="bg-gradient-to-r from-[#00aaff] to-[#1098D5] bg-clip-text text-transparent">
+                {" "}
+                Latest Work
+              </span>
             </h1>
             <p className="mt-8 text-xl leading-8 text-gray-300 max-w-2xl mx-auto">
-              Discover our portfolio of innovative solutions and successful projects that have transformed businesses across industries.
+              Discover our portfolio of innovative solutions and successful
+              projects that have transformed businesses across industries.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="flex items-center gap-2 text-gray-400">
                 <div className="w-2 h-2 bg-[#00aaff] rounded-full animate-pulse" />
-                <span className="text-sm font-medium">Delivering Excellence</span>
+                <span className="text-sm font-medium">
+                  Delivering Excellence
+                </span>
               </div>
             </div>
           </div>

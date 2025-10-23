@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import ClientMap from "./ClientMap";
 
 const locations = [
   { name: "United States", top: "38%", left: "22%" },
@@ -35,38 +34,7 @@ export default function FindUsSection() {
       </motion.div>
 
       {/* Map Container */}
-      <div className="relative w-full max-w-6xl aspect-[16/9] mx-auto bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
-        {/* SVG World Map */}
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png"
-          alt="World Map"
-          className="absolute inset-0 w-full h-full object-contain opacity-90"
-        />
-
-        {/* Highlighted Countries */}
-        {locations.map((loc, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.1 }}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2"
-            style={{ top: loc.top, left: loc.left }}
-          >
-            <div className="relative">
-              <MapPin
-                className="text-[#00aaff] drop-shadow-md"
-                size={28}
-                strokeWidth={2.5}
-              />
-              <div className="absolute left-1/2 top-6 -translate-x-1/2 bg-white text-gray-800 text-xs font-semibold px-2 py-1 rounded shadow-md">
-                {loc.name}
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
+      <ClientMap />
       {/* Footer Message */}
       <motion.p
         initial={{ opacity: 0 }}
@@ -75,7 +43,10 @@ export default function FindUsSection() {
         className="text-gray-700 mt-10 text-center text-sm md:text-base max-w-2xl"
       >
         Have a project you're interested in discussing with us?{" "}
-        <span className="font-semibold text-[#00aaff]">Drop us a line below</span>, we’d love to talk.
+        <span className="font-semibold text-[#00aaff]">
+          Drop us a line below
+        </span>
+        , we’d love to talk.
       </motion.p>
     </section>
   );

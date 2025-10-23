@@ -1,9 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-const Counter = ({ value, showPlus = true }: { value: number; showPlus?: boolean }) => {
+const Counter = ({
+  value,
+  showPlus = true,
+}: {
+  value: number;
+  showPlus?: boolean;
+}) => {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.4 });
@@ -44,12 +50,12 @@ const Counter = ({ value, showPlus = true }: { value: number; showPlus?: boolean
 
 export default function AboutSection() {
   const stats = [
-    { number: 2022, label: "Founded In", showPlus: false },
-    { number: 400, label: "Clients", showPlus: true },
-    { number: 800, label: "Projects", showPlus: true },
-    { number: 35, label: "Industries", showPlus: true },
-    { number: 10, label: "Countries", showPlus: true },
-    { number: 75, label: "Employees", showPlus: true },
+    { number: 2020, label: "Founded In", showPlus: false },
+    { number: 450, label: "Clients", showPlus: true },
+    { number: 300, label: "Projects", showPlus: true },
+    { number: 15, label: "Industries", showPlus: true },
+    { number: 20, label: "Countries", showPlus: true },
+    { number: 10, label: "Employees", showPlus: true },
   ];
 
   return (
@@ -96,10 +102,12 @@ export default function AboutSection() {
         </h3>
 
         <p className="text-gray-700 leading-relaxed mb-8 text-sm md:text-base">
-          Since our debut in 2022, we have evolved into a full-fledged, data-driven digital agency
-          that empowers clients to overcome challenges, explore opportunities, and grow in the
-          digital world. What began as a development provider is now a hub for ambitious specialists
-          driving results across communication, analytics, marketing, design, and web development.
+          Founded in 2020, Orbitwelve began by offering simple digital solutions
+          and quickly earned trust through consistent results. Over time, our
+          clients’ success became our story, driving us to expand into a
+          full-service digital agency. Today, we help businesses grow through
+          strategic design, SEO, and content that truly connects. Every project
+          starts with your goals and ends with measurable growth that lasts.
         </p>
 
         <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
@@ -107,9 +115,9 @@ export default function AboutSection() {
         </h3>
 
         <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-          We continuously refine our expertise, expand into new markets, and embrace emerging
-          technologies to deliver measurable success and help brands stay ahead in the ever-evolving
-          digital landscape.
+          We continuously refine our expertise, expand into new markets, and
+          embrace emerging technologies to deliver measurable success and help
+          brands stay ahead in the ever-evolving digital landscape.
         </p>
       </motion.div>
     </section>
