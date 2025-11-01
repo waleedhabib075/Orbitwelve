@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -29,8 +28,8 @@ export default function ClientsSection({ clients }: ClientsSectionProps) {
       className="relative bg-gradient-to-b from-white to-gray-50 py-24 overflow-hidden"
     >
       {/* Decorative Blurs */}
-      <div className="absolute top-10 left-10 w-40 h-40 bg-[#00aaff]/20 rounded-full blur-3xl opacity-40" />
-      <div className="absolute bottom-10 right-10 w-56 h-56 bg-blue-200 rounded-full blur-3xl opacity-30" />
+      <div className="absolute top-10 left-10 w-40 h-40 bg-[#1098D5]/20 rounded-full blur-3xl opacity-40" />
+      <div className="absolute bottom-10 right-10 w-56 h-56 bg-[#1098D5]/20 rounded-full blur-3xl opacity-30" />
 
       {/* Header */}
       <div className="relative text-center mb-16 px-6">
@@ -49,7 +48,7 @@ export default function ClientsSection({ clients }: ClientsSectionProps) {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="w-20 h-1 bg-[#00aaff] mx-auto mt-4 rounded-full origin-left"
+          className="w-20 h-1 bg-[#1098D5] mx-auto mt-4 rounded-full origin-left"
         />
 
         <motion.p
@@ -59,7 +58,8 @@ export default function ClientsSection({ clients }: ClientsSectionProps) {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="mt-6 text-gray-600 max-w-2xl mx-auto text-base md:text-lg"
         >
-          Trusted by global brands and forward-thinking companies across industries.
+          Trusted by global brands and forward-thinking companies across
+          industries.
         </motion.p>
       </div>
 
@@ -82,7 +82,7 @@ export default function ClientsSection({ clients }: ClientsSectionProps) {
                   width={120}
                   height={80}
                   className="object-contain max-h-16 md:max-h-20 grayscale hover:grayscale-0 transition-all duration-500"
-                  style={{ filter: 'grayscale(100%)' }}
+                  style={{ filter: "grayscale(100%)" }}
                   unoptimized
                 />
               </div>
@@ -95,7 +95,6 @@ export default function ClientsSection({ clients }: ClientsSectionProps) {
       </div>
 
       {/* View All Testimonials Button */}
-     
     </section>
   );
 }

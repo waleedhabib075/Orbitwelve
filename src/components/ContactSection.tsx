@@ -55,7 +55,7 @@ export default function ContactSection() {
           Get In Touch
         </h2>
 
-        <div className="w-20 h-1 bg-[#00aaff] mx-auto mt-4 rounded-full" />
+        <div className="w-20 h-1 bg-[#1098D5] mx-auto mt-4 rounded-full" />
         <p className="mt-6 text-gray-600 max-w-2xl mx-auto leading-relaxed">
           Have a project you’re interested in discussing with us? Fill out the
           form below — we’d love to talk!
@@ -83,7 +83,7 @@ export default function ContactSection() {
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-[#1098D5] focus:outline-none"
               placeholder="Enter your full name"
             />
           </div>
@@ -98,7 +98,7 @@ export default function ContactSection() {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-[#1098D5] focus:outline-none"
               placeholder="you@example.com"
             />
           </div>
@@ -116,7 +116,7 @@ export default function ContactSection() {
               required
               value={formData.phone}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-[#1098D5] focus:outline-none"
               placeholder="+1 (234) 567-890"
             />
           </div>
@@ -130,7 +130,7 @@ export default function ContactSection() {
               required
               value={formData.service}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 bg-white focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 bg-white text-gray-900 focus:ring-2 focus:ring-[#1098D5] focus:outline-none"
             >
               <option value="">Select a service...</option>
               {services.map((service, i) => (
@@ -153,7 +153,7 @@ export default function ContactSection() {
             required
             value={formData.message}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-900 bg-white focus:ring-2 focus:ring-[#1098D5] focus:outline-none"
             placeholder="Tell us more about your project..."
           />
         </div>
@@ -164,7 +164,7 @@ export default function ContactSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="bg-[#00aaff] hover:bg-[#0095dd] text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
+            className="bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
           >
             Send Message
           </motion.button>

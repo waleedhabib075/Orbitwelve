@@ -38,9 +38,8 @@ type Country =
 const BUCKET = "reviews";
 
 function toFolderSlug(country: Country): string {
-  if (country === "all") return "All"; // Match folder name
+  if (country === "all") return "All";
 
-  // Folder names in Supabase start with capital letters
   const folderMap: Record<string, string> = {
     "Saudi Arabia": "Arabia",
     Australia: "Australia",
@@ -66,7 +65,6 @@ function toFolderSlug(country: Country): string {
 
   return folderMap[country] || country;
 }
-
 
 type ImageItem = {
   id: string;
@@ -117,8 +115,6 @@ export default function ClientReviews() {
   const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
 
   const listFolderImages = useCallback(async (folder: string) => {
-    console.log("🔍 Fetching from folder:", folder);
-
     const { data, error } = await supabase.storage.from(BUCKET).list(folder, {
       limit: 200,
       offset: 0,
@@ -130,7 +126,6 @@ export default function ClientReviews() {
       throw error;
     }
 
-    // ✅ Supabase doesn’t return `id`, so we use name as unique key
     const files = (data || []).filter((d: any) => !d.name.endsWith("/"));
 
     const withUrl: ImageItem[] = files.map((f: any, idx: number) => {
@@ -156,7 +151,6 @@ export default function ClientReviews() {
       setError(null);
       try {
         if (country === "all") {
-          // ✅ Load from all folders inside the bucket
           const { data: rootData, error: rootError } = await supabase.storage
             .from(BUCKET)
             .list("", { limit: 100 });
@@ -211,93 +205,90 @@ export default function ClientReviews() {
   );
 
   return (
-    <div className="space-y-20 mt-24">
-      {/* 📝 Text Reviews */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 mt-[200]">
+    <div className="space-y-8 py-16 bg-transparent">
+      {/* 🏷️ Title + Filters */}
+      <div className="text-center mb-12">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6">
           Client Testimonials
         </h2>
-      </div>
 
-      {/* 🖼️ Image Gallery */}
-      <div>
-        {/* Country Filter */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-3">
           {countries.map((country) => {
             const isActive = activeCountry === country;
             return (
               <button
                 key={country}
                 onClick={() => setActiveCountry(country)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
+                className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200 ${
                   isActive
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                    ? "bg-[#1098D5] text-white border-[#1098D5] shadow-sm"
+                    : "bg-transparent text-gray-700 border-gray-300 hover:bg-[#1098D5]/10"
                 }`}
+                style={{ textTransform: "capitalize" }}
               >
                 {country}
               </button>
             );
           })}
         </div>
-
-        {/* Loader */}
-        {loading && (
-          <div className="flex justify-center items-center py-16">
-            <svg
-              className="animate-spin h-8 w-8 text-blue-600"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-              />
-            </svg>
-          </div>
-        )}
-
-        {/* Empty */}
-        {!loading && images.length === 0 && (
-          <div className="text-center text-gray-500 py-16">
-            No images found for "{activeCountry}"
-          </div>
-        )}
-
-        {/* Image Grid */}
-        <AnimatePresence mode="popLayout">
-          <div className="grid grid-cols-2 gap-6">
-            {images.map((img) => (
-              <motion.div
-                key={img.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                className="bg-white rounded-xl shadow-sm hover:shadow-md transition-transform duration-200 hover:scale-[1.02] overflow-hidden"
-              >
-                <img
-                  src={img.url}
-                  alt={img.name}
-                  className="w-full h-80 object-cover cursor-pointer"
-                  loading="lazy"
-                  onClick={() => setSelectedImage(img)}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </AnimatePresence>
       </div>
+
+      {/* Loader */}
+      {loading && (
+        <div className="flex justify-center items-center py-16">
+          <svg
+            className="animate-spin h-8 w-8 text-[#1098D5]"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* Empty */}
+      {!loading && images.length === 0 && (
+        <div className="text-center text-gray-500 py-16">
+          No images found for "{activeCountry}"
+        </div>
+      )}
+
+      {/* Image Grid */}
+      <AnimatePresence mode="popLayout">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+          {images.map((img) => (
+            <motion.div
+              key={img.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="rounded-xl hover:shadow-lg transition-transform duration-200 hover:scale-[1.02] overflow-hidden bg-transparent"
+            >
+              <img
+                src={img.url}
+                alt={img.name}
+                className="w-full h-80 object-cover cursor-pointer"
+                loading="lazy"
+                onClick={() => setSelectedImage(img)}
+              />
+            </motion.div>
+          ))}
+        </div>
+      </AnimatePresence>
 
       {/* Full Size Image Modal */}
       {selectedImage && (

@@ -95,7 +95,7 @@ export default function AboutSection() {
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 uppercase">
           About Us
         </h2>
-        <div className="w-16 h-1 bg-blue-500 mx-auto mt-3 mb-10 rounded-full" />
+        <div className="w-16 h-1 bg-[#1098D5] mx-auto mt-3 mb-10 rounded-full" />
 
         <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
           Creating Success Stories is What We Do

@@ -32,7 +32,7 @@ export default function ProjectsPage() {
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-5xl font-bold tracking-tight text-white sm:text-7xl">
               Our
-              <span className="bg-gradient-to-r from-[#00aaff] to-[#1098D5] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#1098D5] to-[#1098D5] bg-clip-text text-transparent">
                 {" "}
                 Latest Work
               </span>
@@ -43,7 +43,7 @@ export default function ProjectsPage() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="flex items-center gap-2 text-gray-400">
-                <div className="w-2 h-2 bg-[#00aaff] rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-[#1098D5] rounded-full animate-pulse" />
                 <span className="text-sm font-medium">
                   Delivering Excellence
                 </span>

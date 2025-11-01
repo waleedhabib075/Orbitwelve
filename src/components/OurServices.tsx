@@ -101,7 +101,7 @@ export default function OurServices() {
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 relative inline-block">
           OUR SERVICES
-          <span className="block w-16 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></span>
+          <span className="block w-16 h-1 bg-[#1098D5] mx-auto mt-2 rounded-full"></span>
         </h2>
 
         <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

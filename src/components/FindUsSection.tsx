@@ -30,7 +30,7 @@ export default function FindUsSection() {
         <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
           How to Find Us
         </h2>
-        <div className="w-20 h-1 bg-[#00aaff] mx-auto mt-4 rounded-full" />
+        <div className="w-20 h-1 bg-[#1098D5] mx-auto mt-4 rounded-full" />
       </motion.div>
 
       {/* Map Container */}
@@ -43,7 +43,7 @@ export default function FindUsSection() {
         className="text-gray-700 mt-10 text-center text-sm md:text-base max-w-2xl"
       >
         Have a project you're interested in discussing with us?{" "}
-        <span className="font-semibold text-[#00aaff]">
+        <span className="font-semibold text-[#1098D5]">
           Drop us a line below
         </span>
         , we’d love to talk.
