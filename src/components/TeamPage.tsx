@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -58,8 +57,8 @@ export default function TeamSection({ team = defaultTeam }: TeamPageProps) {
       className="relative bg-gradient-to-b from-white to-gray-50 px-6 md:px-12 py-24 overflow-hidden"
     >
       {/* Decorative Blurs */}
-      <div className="absolute top-16 left-20 w-40 h-40 bg-[#00aaff]/20 rounded-full blur-3xl opacity-40" />
-      <div className="absolute bottom-10 right-24 w-56 h-56 bg-blue-200 rounded-full blur-3xl opacity-30" />
+      <div className="absolute top-16 left-20 w-40 h-40 bg-[#1098D5]/20 rounded-full blur-3xl opacity-40" />
+      <div className="absolute bottom-10 right-24 w-56 h-56 bg-[#1098D5]/20 rounded-full blur-3xl opacity-30" />
 
       {/* Header */}
       <motion.div
@@ -72,13 +71,13 @@ export default function TeamSection({ team = defaultTeam }: TeamPageProps) {
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
           Creative Minds
         </h1>
-        <div className="w-20 h-1 bg-[#00aaff] mx-auto mt-4 rounded-full" />
+        <div className="w-20 h-1 bg-[#1098D5] mx-auto mt-4 rounded-full" />
         <h2 className="text-lg md:text-xl font-semibold text-gray-700 mt-6 uppercase">
           Our Leadership Team
         </h2>
         <p className="mt-6 text-gray-600 max-w-3xl mx-auto leading-relaxed text-base md:text-lg">
-          For years, we’ve been offering full-fledged digital marketing services to empower
-          exceptional brands whilst ensuring client satisfaction.
+          For years, we’ve been offering full-fledged digital marketing services
+          to empower exceptional brands whilst ensuring client satisfaction.
         </p>
       </motion.div>
 
@@ -107,7 +106,7 @@ export default function TeamSection({ team = defaultTeam }: TeamPageProps) {
                     unoptimized
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-tr from-[#00aaff] to-[#0044ff] text-white text-3xl font-bold">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-tr from-[#1098D5] to-[#1098D5] text-white text-3xl font-bold">
                     {member.name.charAt(0)}
                   </div>
                 )}

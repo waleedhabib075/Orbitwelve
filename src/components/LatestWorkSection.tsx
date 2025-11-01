@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 interface Project {
   id: string;
@@ -16,7 +16,9 @@ interface LatestWorkSectionProps {
 
 const categories = ["All", "Websites", "Campaigns", "Landing Pages"];
 
-export default function LatestWorkSection({ projects }: LatestWorkSectionProps) {
+export default function LatestWorkSection({
+  projects,
+}: LatestWorkSectionProps) {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredProjects =
@@ -25,7 +27,11 @@ export default function LatestWorkSection({ projects }: LatestWorkSectionProps) 
       : projects.filter((project) => project.category === activeCategory);
 
   if (!projects || projects.length === 0) {
-    return <div className="text-center py-20 text-gray-500">No projects available</div>;
+    return (
+      <div className="text-center py-20 text-gray-500">
+        No projects available
+      </div>
+    );
   }
 
   return (
@@ -34,11 +40,11 @@ export default function LatestWorkSection({ projects }: LatestWorkSectionProps) 
         {/* Header - Hidden since we have it in the page hero */}
         <div className="hidden">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-          Our Latest Work
+            Our Latest Work
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Explore our recent projects that blend creativity, strategy, and technology
-            to drive impactful results.
+            Explore our recent projects that blend creativity, strategy, and
+            technology to drive impactful results.
           </p>
         </div>
 
@@ -52,8 +58,8 @@ export default function LatestWorkSection({ projects }: LatestWorkSectionProps) 
               whileTap={{ scale: 0.95 }}
               className={`px-6 py-3 rounded-full text-sm font-semibold shadow-lg transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-gradient-to-r from-[#00aaff] to-[#1098D5] text-white shadow-xl scale-105"
-                  : "bg-white/90 backdrop-blur-sm text-gray-700 border border-gray-200/50 hover:bg-white hover:text-[#00aaff] hover:shadow-md"
+                  ? "bg-gradient-to-r from-[#1098D5] to-[#1098D5] text-white shadow-xl scale-105"
+                  : "bg-white/90 backdrop-blur-sm text-gray-700 border border-gray-200/50 hover:bg-white hover:text-[#1098D5] hover:shadow-md"
               }`}
             >
               {category}
@@ -97,7 +103,7 @@ export default function LatestWorkSection({ projects }: LatestWorkSectionProps) 
                     {project.name}
                   </h3>
                   {project.category && (
-                    <span className="inline-block bg-gradient-to-r from-[#00aaff]/80 to-[#1098D5]/80 text-white text-xs px-4 py-2 rounded-full backdrop-blur-sm font-medium shadow-lg">
+                    <span className="inline-block bg-gradient-to-r from-[#1098D5]/80 to-[#1098D5]/80 text-white text-xs px-4 py-2 rounded-full backdrop-blur-sm font-medium shadow-lg">
                       {project.category}
                     </span>
                   )}

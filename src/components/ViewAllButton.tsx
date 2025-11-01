@@ -1,17 +1,23 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-export default function ViewAllButton({ href, children }: { href: string; children: React.ReactNode }) {
+export default function ViewAllButton({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
     <motion.a
       href={href}
-      className="mt-8 inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-[#00aaff] to-[#1098D5] text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 group"
+      className="mt-8 inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-[#1098D5] to-[#1098D5] text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 group"
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.98 }}
     >
       {children}
-      <motion.span 
+      <motion.span
         className="ml-2 inline-flex items-center justify-center"
         animate={{
           x: [0, 4, 0],

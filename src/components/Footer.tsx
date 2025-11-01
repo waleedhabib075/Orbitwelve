@@ -31,7 +31,7 @@ export default function Footer() {
           {/* Tagline */}
           <p className="text-black text-sm font-medium max-w-md leading-relaxed tracking-wide uppercase">
             We help brands speak human in a{" "}
-            <span className="text-[#00aaff] font-semibold">Digital World</span>
+            <span className="text-[#1098D5] font-semibold">Digital World</span>
           </p>
 
           <h2 className="text-[#051c27] text-sm font-medium max-w-md leading-relaxed tracking-wide ">
@@ -44,28 +44,28 @@ export default function Footer() {
             <a
               href="#"
               aria-label="Facebook"
-              className="text-[#00aaff] hover:text-black transition-colors"
+              className="text-[#1098D5] hover:text-black transition-colors"
             >
               <FaFacebookF size={18} />
             </a>
             <a
               href="#"
               aria-label="Instagram"
-              className="text-[#00aaff] hover:text-black transition-colors"
+              className="text-[#1098D5] hover:text-black transition-colors"
             >
               <FaInstagram size={18} />
             </a>
             <a
               href="#"
               aria-label="LinkedIn"
-              className="text-[#00aaff] hover:text-black transition-colors"
+              className="text-[#1098D5] hover:text-black transition-colors"
             >
               <FaLinkedinIn size={18} />
             </a>
             <a
               href="#"
               aria-label="Twitter"
-              className="text-[#00aaff] hover:text-black transition-colors"
+              className="text-[#1098D5] hover:text-black transition-colors"
             >
               <FaTwitter size={18} />
             </a>
@@ -76,7 +76,7 @@ export default function Footer() {
       {/* BOTTOM SECTION */}
       <div className="bg-[#f5f5f5] text-gray-600 text-sm py-4">
         <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-4">
-          <a href="#" className="hover:text-[#00aaff] transition-colors">
+          <a href="/privacy" className="hover:text-[#1098D5] transition-colors">
             Privacy Policy
           </a>
           <span className="hidden md:inline">|</span>

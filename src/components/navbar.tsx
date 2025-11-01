@@ -4,12 +4,48 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleNavClick = (
+    href: string,
+    e: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    // If it's a hash link
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      setIsOpen(false);
+
+      // If we're on the home page, just scroll
+      if (pathname === "/") {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else {
+        // If we're on a different page, navigate to home with hash
+        router.push(`/${href}`);
+
+        // Wait for navigation then scroll after page loads
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 800);
+      }
+    } else {
+      // Regular link, just close mobile menu
+      setIsOpen(false);
+    }
+  };
 
   const navLinks = [
     { href: "#about", label: "ABOUT" },
@@ -40,9 +76,13 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center space-x-8   text-sm font-medium tracking-wide">
           {navLinks.map(({ href, label }) => (
             <li key={label}>
-              <Link href={href} className="relative group transition-colors">
-                <span className="hover:text-[#00aaff]">{label}</span>
-                <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-[#00aaff] transition-all duration-300 group-hover:w-full" />
+              <Link
+                href={href}
+                onClick={(e) => handleNavClick(href, e)}
+                className="relative group transition-colors"
+              >
+                <span className="hover:text-[#1098D5]">{label}</span>
+                <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-[#1098D5] transition-all duration-300 group-hover:w-full" />
               </Link>
             </li>
           ))}
@@ -53,7 +93,7 @@ export default function Navbar() {
         {/* <button
             className="bg-[#1098D5] text-white text-sm font-semibold 
                        px-5 py-2  shadow-md hover:shadow-lg hover:scale-[1.03] 
-                       transition-all duration-300 focus:ring-2 focus:ring-[#00aaff]/50 focus:outline-none"
+                       transition-all duration-300 focus:ring-2 focus:ring-[#1098D5]/50 focus:outline-none"
           >
             DOWNLOAD PROFILE
           </button> */}
@@ -82,8 +122,8 @@ export default function Navbar() {
                 <li key={label}>
                   <Link
                     href={href}
-                    className="block py-1 hover:text-[#00aaff] transition-colors"
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => handleNavClick(href, e)}
+                    className="block py-1 hover:text-[#1098D5] transition-colors"
                   >
                     {label}
                   </Link>
@@ -96,7 +136,7 @@ export default function Navbar() {
               {/* <button
                 className="w-3/4 bg-[#1098D5] text-white text-sm font-semibold 
                            px-5 py-2  shadow-md hover:shadow-lg hover:scale-[1.02] 
-                           transition-all duration-300 focus:ring-2 focus:ring-[#00aaff]/50 focus:outline-none"
+                           transition-all duration-300 focus:ring-2 focus:ring-[#1098D5]/50 focus:outline-none"
               >
                 DOWNLOAD PROFILE
               </button> */}

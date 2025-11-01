@@ -18,6 +18,7 @@ type CountryName =
   | "India"
   | "Italy"
   | "Jordan"
+  | "Mexico"
   | "Netherlands"
   | "Pakistan"
   | "Panama"
@@ -39,141 +40,148 @@ const countries: Record<string, CountryData> = {
     name: "Saudi Arabia",
     clients: 10,
     coordinates: [45.0792, 23.8859],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "682",
   },
   Australia: {
     name: "Australia",
     clients: 4,
     coordinates: [133.7751, -25.2744],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "036",
   },
   Bahrain: {
     name: "Bahrain",
     clients: 1,
     coordinates: [50.5577, 26.0667],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "048",
   },
   Belgium: {
     name: "Belgium",
     clients: 1,
     coordinates: [4.4699, 50.5039],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "056",
   },
   Canada: {
     name: "Canada",
     clients: 11,
     coordinates: [-106.3468, 56.1304],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "124",
   },
   France: {
     name: "France",
     clients: 2,
     coordinates: [2.2137, 46.2276],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "250",
   },
   Germany: {
     name: "Germany",
     clients: 4,
     coordinates: [10.4515, 51.1657],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "276",
   },
   Grenada: {
     name: "Grenada",
     clients: 1,
     coordinates: [-61.679, 12.1165],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "308",
   },
   Gyana: {
     name: "Gyana",
     clients: 2,
     coordinates: [-58.9302, 4.8604],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "328",
   },
   "Hong Kong": {
     name: "Hong Kong",
     clients: 1,
     coordinates: [114.1694, 22.3193],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "344",
   },
   India: {
     name: "India",
     clients: 6,
     coordinates: [78.9629, 20.5937],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "356",
   },
   Italy: {
     name: "Italy",
     clients: 1,
     coordinates: [12.5674, 41.8719],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "380",
   },
   Jordan: {
     name: "Jordan",
     clients: 1,
     coordinates: [36.2384, 30.5852],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "400",
   },
   Netherlands: {
     name: "Netherlands",
     clients: 3,
     coordinates: [5.2913, 52.1326],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "528",
   },
   Pakistan: {
     name: "Pakistan",
     clients: 6,
     coordinates: [69.3451, 30.3753],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "586",
   },
   Panama: {
     name: "Panama",
     clients: 1,
     coordinates: [-80.7821, 8.5379],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "591",
   },
   Poland: {
     name: "Poland",
     clients: 2,
     coordinates: [19.1451, 51.9194],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "616",
   },
   UAE: {
     name: "UAE",
     clients: 7,
     coordinates: [54.3773, 24.4539],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "784",
   },
   UK: {
     name: "UK",
     clients: 15,
     coordinates: [-3.435973, 55.378051],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "826",
   },
   USA: {
     name: "USA",
     clients: 49,
     coordinates: [-95.7129, 37.0902],
-    color: "#2563eb",
+    color: "#1098D5",
     id: "840",
+  },
+  Mexico: {
+    name: "Mexico",
+    clients: 5,
+    coordinates: [-102.5528, 23.6345],
+    color: "#1098D5",
+    id: "484",
   },
 };
 
@@ -198,8 +206,8 @@ export default function ClientMap() {
 
     const projection = d3
       .geoMercator()
-      .scale(150)
-      .translate([width / 2, height / 1.5]);
+      .scale(150) // 🔽 reduce scale (was 150)
+      .translate([width / 2, height / 1.55]); // slight vertical adjustment
 
     const path = d3.geoPath().projection(projection);
     const g = svg.append("g");
@@ -237,7 +245,7 @@ export default function ClientMap() {
         .on("mouseover", function (event: any, d: any) {
           const c = Object.values(countries).find((c) => c.id === String(d.id));
           if (c) {
-            d3.select(this).attr("fill", "#3b82f6").attr("opacity", 0.8);
+            d3.select(this).attr("fill", "#1098D5").attr("opacity", 0.8);
             const [x, y] = d3.pointer(event, svg.node());
             setTooltip({
               show: true,
@@ -271,7 +279,7 @@ export default function ClientMap() {
             .attr("cx", coords[0])
             .attr("cy", coords[1])
             .attr("r", 0)
-            .attr("fill", "#1e3a8a")
+            .attr("fill", "#1098D5")
             .attr("stroke", "white")
             .attr("stroke-width", 3)
             .transition()
@@ -292,7 +300,7 @@ export default function ClientMap() {
   }, [selected]);
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto bg-white rounded-xl shadow-md p-4">
+    <div className="relative w-full max-w-5xl mx-auto bg-white shadow-md p-4 border border-gray-200">
       {tooltip.show && (
         <div
           className="absolute bg-gray-800 text-white text-sm px-4 py-2 rounded-md shadow-lg pointer-events-none z-50"
@@ -311,7 +319,7 @@ export default function ClientMap() {
           ref={svgRef}
           viewBox="0 0 960 500"
           className="w-full h-auto"
-          style={{ background: "#f0f9ff" }}
+          style={{ background: "#f9fbfc" }} // lighter blue-gray tone
         />
       </div>
       <style jsx global>{`
