@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.tile.openstreetmap.org",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "source.unsplash.com",
+        pathname: "/**",
+      },
     ],
   },
   eslint: {
