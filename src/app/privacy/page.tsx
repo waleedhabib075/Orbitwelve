@@ -1,75 +1,6 @@
 "use client";
 
 export default function PrivacyPage() {
-  const handleDownload = () => {
-    // Get the content element
-    const content = document.querySelector(".privacy-content");
-    if (!content) return;
-
-    // Create a new window with the content
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) return;
-
-    // Get the content HTML
-    const contentHTML = content.innerHTML;
-
-    // Create a complete HTML document with styles
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Privacy Policy - OrbitTwelve</title>
-          <style>
-            body {
-              font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-              max-width: 800px;
-              margin: 40px auto;
-              padding: 20px;
-              line-height: 1.6;
-              color: #000;
-            }
-            h2 {
-              font-size: 20px;
-              font-weight: bold;
-              margin-top: 24px;
-              margin-bottom: 12px;
-            }
-            ul {
-              margin-left: 20px;
-              margin-bottom: 12px;
-            }
-            li {
-              margin-bottom: 8px;
-            }
-            strong {
-              font-weight: bold;
-            }
-            a {
-              color: #1098D5;
-              text-decoration: underline;
-            }
-          </style>
-        </head>
-        <body>
-          <h1 style="text-align: center; margin-bottom: 30px;">Privacy Policy</h1>
-          ${contentHTML}
-        </body>
-      </html>
-    `;
-
-    printWindow.document.write(htmlContent);
-    printWindow.document.close();
-
-    // Wait for content to load, then print as PDF
-    setTimeout(() => {
-      printWindow.print();
-      // Clean up after a delay
-      setTimeout(() => {
-        printWindow.close();
-      }, 250);
-    }, 250);
-  };
-
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Hero Section */}
@@ -332,16 +263,6 @@ export default function PrivacyPage() {
                     or how your data is handled, please contact us.
                   </p>
                 </div>
-              </div>
-
-              {/* Download Button */}
-              <div className="flex justify-start mt-12">
-                <button
-                  onClick={handleDownload}
-                  className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
-                >
-                  DOWNLOAD
-                </button>
               </div>
             </div>
           </div>

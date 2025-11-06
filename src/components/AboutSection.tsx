@@ -93,31 +93,23 @@ export default function AboutSection() {
         className="max-w-4xl text-center"
       >
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 uppercase">
-          About Us
+          ABOUT ORBITWELVE
         </h2>
         <div className="w-16 h-1 bg-[#1098D5] mx-auto mt-3 mb-10 rounded-full" />
 
         <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
-          Creating Success Stories is What We Do
+          Creating Digital Success Stories Since 2020
         </h3>
 
         <p className="text-gray-700 leading-relaxed mb-8 text-sm md:text-base">
-          Founded in 2020, Orbitwelve began by offering simple digital solutions
-          and quickly earned trust through consistent results. Over time, our
-          clients’ success became our story, driving us to expand into a
-          full-service digital agency. Today, we help businesses grow through
-          strategic design, SEO, and content that truly connects. Every project
-          starts with your goals and ends with measurable growth that lasts.
-        </p>
-
-        <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
-          Our Efforts Don’t Stop Here
-        </h3>
-
-        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-          We continuously refine our expertise, expand into new markets, and
-          embrace emerging technologies to deliver measurable success and help
-          brands stay ahead in the ever-evolving digital landscape.
+          Orbitwelve is a full-service digital agency helping brands,
+          researchers, and businesses grow through strategy, creativity, and
+          technology. Founded in 2020, we started by offering small-scale
+          digital solutions, today, we empower global clients with end-to-end
+          digital services. Every Orbitwelve project begins with understanding
+          your goals and ends with measurable growth. We turn ideas into
+          intelligent digital experiences that engage audiences and deliver
+          lasting impact.
         </p>
       </motion.div>
     </section>

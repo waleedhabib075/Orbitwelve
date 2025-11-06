@@ -28,7 +28,7 @@ export default function FindUsSection() {
         className="text-center mb-12"
       >
         <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tight">
-          How to Find Us
+          HOW TO FIND US
         </h2>
         <div className="w-20 h-1 bg-[#1098D5] mx-auto mt-4 rounded-full" />
       </motion.div>
@@ -42,11 +42,8 @@ export default function FindUsSection() {
         transition={{ delay: 0.3, duration: 0.8 }}
         className="text-gray-700 mt-10 text-center text-sm md:text-base max-w-2xl"
       >
-        Have a project you're interested in discussing with us?{" "}
-        <span className="font-semibold text-[#1098D5]">
-          Drop us a line below
-        </span>
-        , we’d love to talk.
+        Connect with us on LinkedIn, Instagram, and Facebook, and let Orbitwelve
+        transform your digital vision into reality.
       </motion.p>
     </section>
   );
