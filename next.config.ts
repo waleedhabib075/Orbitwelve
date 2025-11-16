@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
         hostname: "source.unsplash.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.playbook.com",
+        pathname: "/**",
+      },
     ],
   },
   eslint: {

@@ -28,15 +28,15 @@ export function Hero() {
                      tracking-tight text-white drop-shadow-lg
                      text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          LET&apos;S CREATE
-          <br />
-          A STORY
+          LET&apos;S GROW
           <br />
           TOGETHER
+          <br />
+          FOREVER
         </h1>
 
         <p className="mt-6 max-w-md text-sm sm:text-base text-white/80">
-          We craft digital experiences that connect, inspire, and transform your brand.
+        We bring your vision to life with digital innovation.
         </p>
       </div>
 
