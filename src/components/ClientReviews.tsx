@@ -73,13 +73,22 @@ type ImageItem = {
   country: string;
 };
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
 export default function ClientReviews() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [supabase, setSupabase] = useState<ReturnType<typeof createClient> | null>(null);
+  
+  // Initialize Supabase client only on the client side
+  useEffect(() => {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (url && key) {
+      try {
+        setSupabase(createClient(url, key));
+      } catch (err) {
+        console.error("Failed to initialize Supabase:", err);
+      }
+    }
+  }, []);
 
   const countries: Country[] = useMemo(
     () => [
@@ -115,6 +124,11 @@ export default function ClientReviews() {
   const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
 
   const listFolderImages = useCallback(async (folder: string) => {
+    if (!supabase) {
+      setError("Supabase is not configured");
+      return [];
+    }
+
     const { data, error } = await supabase.storage.from(BUCKET).list(folder, {
       limit: 200,
       offset: 0,
@@ -149,6 +163,14 @@ export default function ClientReviews() {
     async (country: Country) => {
       setLoading(true);
       setError(null);
+      
+      if (!supabase) {
+        setError("Supabase is not configured. Please add Supabase environment variables.");
+        setImages([]);
+        setLoading(false);
+        return;
+      }
+
       try {
         if (country === "all") {
           const { data: rootData, error: rootError } = await supabase.storage

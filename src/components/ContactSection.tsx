@@ -23,19 +23,46 @@ export default function ContactSection() {
     "Branding",
   ];
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you! We’ll get in touch soon.");
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send email");
+      }
+
+      setSuccess(true);
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+      
+      setTimeout(() => setSuccess(false), 5000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,6 +98,20 @@ export default function ContactSection() {
         viewport={{ once: true }}
         className="w-full max-w-3xl bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-100 space-y-6"
       >
+        {/* Success Message */}
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-md">
+            ✓ Thank you! We've received your message and will get back to you shortly.
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-md">
+            ✗ {error}
+          </div>
+        )}
+
         {/* Name + Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -164,9 +205,10 @@ export default function ContactSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
+            disabled={loading}
+            className="bg-[#1098D5] hover:bg-[#0d7fb3] disabled:bg-gray-400 text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </motion.button>
         </div>
       </motion.form>
