@@ -7,10 +7,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+							SECURE DEVELOPMENT <span className="text-[#1098D5]">SOLUTIION</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-							Create Your Success Stories With Our Quality IT Services. See Our Key Expertise Below.
+						Find and fix vulnerabilities before code reaches production.
 						</p>
 					</div>
 				</div>
@@ -32,39 +32,33 @@ export default function Page() {
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Secure Coding" width={60} height={60} className="object-contain" />
+									<Image src="/github.png" alt="Secure Coding" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Secure Coding</span>
+								<span className="text-sm text-gray-600 text-center">Github</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Security Testing" width={60} height={60} className="object-contain" />
+									<Image src="/OWASP.png" alt="Security Testing" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Security Testing</span>
+								<span className="text-sm text-gray-600 text-center">OWASP</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="AI Security" width={60} height={60} className="object-contain" />
+									<Image src="/Postman.png" alt="AI Security" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">AI Security</span>
+								<span className="text-sm text-gray-600 text-center">Postman</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Threat Detection" width={60} height={60} className="object-contain" />
+									<Image src="/PyTorch.png" alt="Threat Detection" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Threat Detection</span>
+								<span className="text-sm text-gray-600 text-center">PyTorch</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Encryption" width={60} height={60} className="object-contain" />
+									<Image src="/Tensorflow.png" alt="Encryption" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Encryption</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Compliance" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Compliance</span>
+								<span className="text-sm text-gray-600 text-center">Tensorflow</span>
 							</div>
 						</div>
 

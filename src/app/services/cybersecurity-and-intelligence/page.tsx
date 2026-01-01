@@ -7,10 +7,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+							CYBER THREAT <span className="text-[#1098D5]">INTELLIGENCE</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-							Create Your Success Stories With Our Quality IT Services. See Our Key Expertise Below.
+						Find unseen security gaps before attackers exploit them.
 						</p>
 					</div>
 				</div>
@@ -25,46 +25,44 @@ export default function Page() {
 						</h2>
 						<div className="text-gray-700 leading-relaxed space-y-4 text-center mb-12">
 							<p>
-								Protect what matters most. Our cybersecurity division provides security research writing, targeted OSINT, digital forensics, and VAPT services. We help organizations identify vulnerabilities, investigate threats, and implement robust security measures to safeguard their digital assets and sensitive information.
+							Protect what matters most. Our cybersecurity division provides:
+Security Research Writing: Expert reports and whitepapers on emerging cyber threats.
+Targeted OSINT: Deep investigation and intelligence gathering for organizations and brands.
+Digital Forensics: Evidence analysis and data recovery from compromised systems.
+VAPT (Vulnerability Assessment & Penetration Testing): End-to-end evaluation of your digital assets to identify and mitigate risks.
 							</p>
 						</div>
 
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="VAPT" width={60} height={60} className="object-contain" />
+									<Image src="/Autopsy.png" alt="VAPT" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">VAPT</span>
+								<span className="text-sm text-gray-600 text-center">Autopsy</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="OSINT" width={60} height={60} className="object-contain" />
+									<Image src="/Wireshark.png" alt="OSINT" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">OSINT</span>
+								<span className="text-sm text-gray-600 text-center">Wireshark</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Forensics" width={60} height={60} className="object-contain" />
+									<Image src="/Metasploit.png" alt="Forensics" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Forensics</span>
+								<span className="text-sm text-gray-600 text-center">Metasploit</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Threat Analysis" width={60} height={60} className="object-contain" />
+									<Image src="/Nmap.png" alt="Threat Analysis" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Threat Analysis</span>
+								<span className="text-sm text-gray-600 text-center">Nmap</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Security Research" width={60} height={60} className="object-contain" />
+									<Image src="/Burpsuite.png" alt="Security Research" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Security Research</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Incident Response" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Incident Response</span>
+								<span className="text-sm text-gray-600 text-center">Burpsuite</span>
 							</div>
 						</div>
 

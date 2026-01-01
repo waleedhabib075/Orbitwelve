@@ -1,21 +1,43 @@
 "use client";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+import { useEffect, useState } from "react";
 
-const heroImage = {
-  src: "https://www.playbook.com/s/ghaziii/uSq7M3BRmx1g3558LMvMNC4W?assetToken=sCkTcThttps://img.freepik.com/free-photo/colorful-pawns-white-background_23-2148642276.jpg?semt=ais_hybrid&w=740&q=80yUxYgfvQDoZytGnjYd",
-  alt: "Brand visuals collage",
-};
+import hero1 from "../../public/hero1.webp";
+import hero2 from "../../public/hero2.webp";
+import hero3 from "../../public/hero3.webp";
+
+const slides: StaticImageData[] = [hero1, hero2, hero3];
+const SLIDE_INTERVAL_MS = 5000;
 
 export default function ImageSlider() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((index) => (index + 1) % slides.length);
+    }, SLIDE_INTERVAL_MS);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="absolute inset-0 w-full h-full">
-      <Image
-        src={heroImage.src}
-        alt={heroImage.alt}
-        fill
-        style={{ objectFit: "cover" }}
-        priority
-      />
+    <div className="absolute inset-0 h-full w-full">
+      {slides.map((image, index) => (
+        <div
+          key={image.src}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === active ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Image
+            src={image}
+            alt="Hero background"
+            fill
+            style={{ objectFit: "cover" }}
+            priority={index === 0}
+          />
+        </div>
+      ))}
     </div>
   );
 }

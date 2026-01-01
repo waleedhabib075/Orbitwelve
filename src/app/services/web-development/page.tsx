@@ -7,10 +7,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+							PROBLEM SOLVING <span className="text-[#1098D5]">WEBSITES</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-							Create Your Success Stories With Our Quality IT Services. See Our Key Expertise Below.
+						Transform slow confusing sites into clear converting experiences.
 						</p>
 					</div>
 				</div>
@@ -32,39 +32,51 @@ export default function Page() {
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="React" width={60} height={60} className="object-contain" />
+									<Image src="/vscode.png" alt="React" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">React</span>
+								<span className="text-sm text-gray-600 text-center">VS Code</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Next.js" width={60} height={60} className="object-contain" />
+									<Image src="/Cursor.png" alt="Next.js" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Next.js</span>
+								<span className="text-sm text-gray-600 text-center">Cursor</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Node.js" width={60} height={60} className="object-contain" />
+									<Image src="/Windsurf.png" alt="Node.js" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Node.js</span>
+								<span className="text-sm text-gray-600 text-center">Windsurf</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="PHP" width={60} height={60} className="object-contain" />
+									<Image src="/Azure.png" alt="PHP" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">PHP</span>
+								<span className="text-sm text-gray-600 text-center">Azure</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="WordPress" width={60} height={60} className="object-contain" />
+									<Image src="/github.png" alt="WordPress" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">WordPress</span>
+								<span className="text-sm text-gray-600 text-center">GitHub</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="MongoDB" width={60} height={60} className="object-contain" />
+									<Image src="/reactjs.png" alt="MongoDB" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">MongoDB</span>
+								<span className="text-sm text-gray-600 text-center">ReactJS</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/nextjs.png" alt="MongoDB" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">NextJS</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Git.png" alt="MongoDB" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Git</span>
 							</div>
 						</div>
 

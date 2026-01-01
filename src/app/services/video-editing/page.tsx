@@ -7,10 +7,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+							IMPACTFUL VIDEO <span className="text-[#1098D5]">EDITING</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-							Create Your Success Stories With Our Quality IT Services. See Our Key Expertise Below.
+						Turn raw footage into stories that drive action.
 						</p>
 					</div>
 				</div>
@@ -32,40 +32,29 @@ export default function Page() {
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Premiere Pro" width={60} height={60} className="object-contain" />
+									<Image src="/premierpro.png" alt="Premiere Pro" width={60} height={60} className="object-contain" />
 								</div>
 								<span className="text-sm text-gray-600 text-center">Premiere Pro</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="After Effects" width={60} height={60} className="object-contain" />
+									<Image src="/filmora.png" alt="After Effects" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">After Effects</span>
+								<span className="text-sm text-gray-600 text-center">Filmora</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Motion Graphics" width={60} height={60} className="object-contain" />
+									<Image src="/capcut.png" alt="Motion Graphics" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Motion Graphics</span>
+								<span className="text-sm text-gray-600 text-center">Capcut</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Color Grading" width={60} height={60} className="object-contain" />
+									<Image src="/DaVinciResolve.png" alt="Color Grading" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Color Grading</span>
+								<span className="text-sm text-gray-600 text-center">DaVinciResolve</span>
 							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Sound Design" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Sound Design</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Animation" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Animation</span>
-							</div>
+							
 						</div>
 
 						<div className="text-center">

@@ -7,10 +7,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+							TARGETED <span className="text-[#1098D5]">LEAD GENERATION</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-							Create Your Success Stories With Our Quality IT Services. See Our Key Expertise Below.
+						Replace cold guessing with qualified ready to talk.
 						</p>
 					</div>
 				</div>
@@ -32,40 +32,11 @@ export default function Page() {
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Automation" width={60} height={60} className="object-contain" />
+									<Image src="/n8n.png" alt="Automation" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Automation</span>
+								<span className="text-sm text-gray-600 text-center">n8n</span>
 							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="CRM Integration" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">CRM Integration</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Email Campaigns" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Email Campaigns</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Landing Pages" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Landing Pages</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Lead Scoring" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Lead Scoring</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Analytics" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Analytics</span>
-							</div>
+						
 						</div>
 
 						<div className="text-center">

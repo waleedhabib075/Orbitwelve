@@ -36,40 +36,35 @@ export default function Page() {
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Keyword Research" width={60} height={60} className="object-contain" />
+									<Image src="/freepik.png" alt="Keyword Research" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Keyword Research</span>
+								<span className="text-sm text-gray-600 text-center">FreePik</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="On-Page SEO" width={60} height={60} className="object-contain" />
+									<Image src="/SEMRush.png" alt="On-Page SEO" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">On-Page SEO</span>
+								<span className="text-sm text-gray-600 text-center">SEM Rush</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Link Building" width={60} height={60} className="object-contain" />
+									<Image src="/Ahref.png" alt="Link Building" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Link Building</span>
+								<span className="text-sm text-gray-600 text-center">Ahrefs</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Technical SEO" width={60} height={60} className="object-contain" />
+									<Image src="/GoogleSearchConsol.png" alt="Technical SEO" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Technical SEO</span>
+								<span className="text-sm text-gray-600 text-center">Google Search Console</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Content Optimization" width={60} height={60} className="object-contain" />
+									<Image src="/GoogleAnalytics.png" alt="Content Optimization" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Content Optimization</span>
+								<span className="text-sm text-gray-600 text-center">Google Analytics</span>
 							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Analytics" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Analytics</span>
-							</div>
+							
 						</div>
 
 						{/* CTA Button */}

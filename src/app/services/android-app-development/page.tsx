@@ -7,10 +7,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+						ANDROID APPS THAT <span className="text-[#1098D5]">WORKS</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-							Create Your Success Stories With Our Quality IT Services. See Our Key Expertise Below.
+						Turn rough ideas into stable user friendly apps.
 						</p>
 					</div>
 				</div>
@@ -32,39 +32,81 @@ export default function Page() {
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Kotlin" width={60} height={60} className="object-contain" />
+									<Image src="/AndroidStudio.png" alt="Kotlin" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Android Studio</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Kotlin.png" alt="Java" width={60} height={60} className="object-contain" />
 								</div>
 								<span className="text-sm text-gray-600 text-center">Kotlin</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Java" width={60} height={60} className="object-contain" />
+									<Image src="/Compose.png" alt="React Native" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Jetpack Compose</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/API.png" alt="Flutter" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">API Integration</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/XML.png" alt="Firebase" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Firebase Integration</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/JAVA.png" alt="API Integration" width={60} height={60} className="object-contain" />
 								</div>
 								<span className="text-sm text-gray-600 text-center">Java</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="React Native" width={60} height={60} className="object-contain" />
+									<Image src="/reactnative.png" alt="API Integration" width={60} height={60} className="object-contain" />
 								</div>
 								<span className="text-sm text-gray-600 text-center">React Native</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Flutter" width={60} height={60} className="object-contain" />
+									<Image src="/Expo.png" alt="API Integration" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Flutter</span>
+								<span className="text-sm text-gray-600 text-center">Expo</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Firebase" width={60} height={60} className="object-contain" />
+									<Image src="/tailwind.png" alt="API Integration" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Tailwind CSS</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Mongoodb.png" alt="API Integration" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">MongoDB</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/SQL.png" alt="API Integration" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">SQLite</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Firebase.png" alt="API Integration" width={60} height={60} className="object-contain" />
 								</div>
 								<span className="text-sm text-gray-600 text-center">Firebase</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="API Integration" width={60} height={60} className="object-contain" />
+									<Image src="/supabase.png" alt="API Integration" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">API Integration</span>
+								<span className="text-sm text-gray-600 text-center">Supabase</span>
 							</div>
 						</div>
 

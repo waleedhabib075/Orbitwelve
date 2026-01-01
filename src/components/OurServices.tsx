@@ -6,84 +6,84 @@ const services = [
   {
     title: "Social Media Management",
     slug: "social-media-management",
-    icon: "/social-media.png",
+    icon: "/socialmedia.png",
     blurb:
       "Build your brand’s voice and grow your community with full-funnel social media management.",
   },
   {
     title: "Digital Marketing",
     slug: "digital-marketing",
-    icon: "/paid-media.png",
+    icon: "/digitalmarketing.png",
     blurb:
       "From PPC and content to automation and funnels—attract, convert, and retain customers.",
   },
   {
     title: "Android App Development",
     slug: "android-app-development",
-    icon: "/devops.png",
+    icon: "/andoriddev.png",
     blurb:
       "Secure, scalable, and user-friendly Android applications optimized for speed and UX.",
   },
   {
     title: "Web Development",
     slug: "web-development",
-    icon: "/devops.png",
+    icon: "/webdev.png",
     blurb:
       "Modern, responsive, SEO-ready websites with end-to-end performance optimization.",
   },
   {
     title: "Graphic Designing",
     slug: "graphic-designing",
-    icon: "/branding.png",
+    icon: "/graphic.png",
     blurb:
       "Logos, brand kits, campaigns, and UI/UX that deliver a memorable brand presence.",
   },
   {
     title: "Video Editing",
     slug: "video-editing",
-    icon: "/content.png",
+    icon: "/videoedit.png",
     blurb:
       "Corporate videos, product reels, promos, and motion graphics aligned to your story.",
   },
   {
     title: "Academic Research Writing",
     slug: "academic-research-writing",
-    icon: "/data-analytics.png",
+    icon: "/research.png",
     blurb:
       "From literature reviews to journal-ready manuscripts—structured and compliant.",
   },
   {
     title: "SEO Management",
     slug: "seo-management",
-    icon: "/search.png",
+    icon: "/seo.png",
     blurb:
       "Rank higher with data-driven keyword research, on-page optimization, and backlinks.",
   },
   {
     title: "Lead Generation",
     slug: "lead-generation",
-    icon: "/digital-consultancy.png",
+    icon: "/leadGen.png",
     blurb:
       "Automation, analytics, and creative funnels to acquire qualified leads efficiently.",
   },
   {
     title: "Cybersecurity & Intelligence",
     slug: "cybersecurity-and-intelligence",
-    icon: "/security.png",
+    icon: "/cyber.png",
     blurb:
       "OSINT, forensics, VAPT, and research writing to protect what matters most.",
   },
   {
     title: "Infrastructure & Operations",
     slug: "infrastructure-and-operations",
-    icon: "/infrastructure.png",
+    icon: "/INFRASTRUCTURE.png",
     blurb:
       "IT support, network security, and Linux administration for a reliable backbone.",
   },
   {
     title: "Secure Development",
     slug: "secure-development",
-    icon: "/devops.png",
+    icon: "/securedev.png",
     blurb:
       "Secure full-stack development and AI in cybersecurity for next‑gen defense.",
   },

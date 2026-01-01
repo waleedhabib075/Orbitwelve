@@ -32,39 +32,39 @@ export default function Page() {
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Logo Design" width={60} height={60} className="object-contain" />
+									<Image src="/xd.png" alt="Logo Design" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Logo Design</span>
+								<span className="text-sm text-gray-600 text-center">XD Design</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Brand Identity" width={60} height={60} className="object-contain" />
+									<Image src="/Photoshop.png" alt="Brand Identity" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Brand Identity</span>
+								<span className="text-sm text-gray-600 text-center">Photoshop</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="UI/UX Design" width={60} height={60} className="object-contain" />
+									<Image src="/sketch.png" alt="UI/UX Design" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">UI/UX Design</span>
+								<span className="text-sm text-gray-600 text-center">Sketch</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Adobe Creative Suite" width={60} height={60} className="object-contain" />
+									<Image src="/illustrator.png" alt="Adobe Creative Suite" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Adobe Creative Suite</span>
+								<span className="text-sm text-gray-600 text-center">Illustrator</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Figma" width={60} height={60} className="object-contain" />
+									<Image src="/figma.png" alt="Figma" width={60} height={60} className="object-contain" />
 								</div>
 								<span className="text-sm text-gray-600 text-center">Figma</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Illustration" width={60} height={60} className="object-contain" />
+									<Image src="/canva.png" alt="Illustration" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Illustration</span>
+								<span className="text-sm text-gray-600 text-center">Canva</span>
 							</div>
 						</div>
 

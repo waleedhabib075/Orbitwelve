@@ -33,8 +33,16 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you! We’ll get in touch soon.");
+    const subject = encodeURIComponent(
+      `New inquiry from ${formData.name || "Orbitwelve website"}`
+    );
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${
+        formData.phone
+      }\nService: ${formData.service}\n\nMessage:\n${formData.message}`
+    );
+
+    window.location.href = `mailto:contact@orbitwelve.com?subject=${subject}&body=${body}`;
     setFormData({ name: "", email: "", phone: "", service: "", message: "" });
   };
 

@@ -7,10 +7,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+							STABLE INFRASTRUCTURE <span className="text-[#1098D5]">OPERATIONS</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-							Create Your Success Stories With Our Quality IT Services. See Our Key Expertise Below.
+						Prevent downtime with monitored scalable cloud ready systems.
 						</p>
 					</div>
 				</div>
@@ -25,46 +25,43 @@ export default function Page() {
 						</h2>
 						<div className="text-gray-700 leading-relaxed space-y-4 text-center mb-12">
 							<p>
-								Reliable IT backbone for sustainable growth. Our services include IT support, network security, and Linux system administration. We provide continuous assistance to maintain uptime and performance, implement firewalls and threat detection systems, and manage secure, optimized, and scalable Linux environments for business continuity.
+							Reliable IT backbone for sustainable growth. Our services include:
+IT Support: Continuous assistance to maintain uptime and performance.
+Network Security: Firewalls, threat detection, and protection systems for business continuity.
+Linux System Administration: Secure, optimized, and scalable Linux environments managed by certified professionals.
 							</p>
 						</div>
 
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="IT Support" width={60} height={60} className="object-contain" />
+									<Image src="/linux.png" alt="IT Support" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">IT Support</span>
+								<span className="text-sm text-gray-600 text-center">Linux</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Network Security" width={60} height={60} className="object-contain" />
+									<Image src="/Kubernetes.png" alt="Network Security" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Network Security</span>
+								<span className="text-sm text-gray-600 text-center">Kubernetes</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Linux Admin" width={60} height={60} className="object-contain" />
+									<Image src="/Ngnix.png" alt="Linux Admin" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Linux Admin</span>
+								<span className="text-sm text-gray-600 text-center">Ngnix</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Cloud Services" width={60} height={60} className="object-contain" />
+									<Image src="/Grafana.png" alt="Cloud Services" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Cloud Services</span>
+								<span className="text-sm text-gray-600 text-center">Grafana</span>
 							</div>
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Monitoring" width={60} height={60} className="object-contain" />
+									<Image src="/Windows.png" alt="Monitoring" width={60} height={60} className="object-contain" />
 								</div>
-								<span className="text-sm text-gray-600 text-center">Monitoring</span>
-							</div>
-							<div className="flex flex-col items-center">
-								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-									<Image src="/placeholder-icon.png" alt="Backup & Recovery" width={60} height={60} className="object-contain" />
-								</div>
-								<span className="text-sm text-gray-600 text-center">Backup & Recovery</span>
+								<span className="text-sm text-gray-600 text-center">Windows</span>
 							</div>
 						</div>
 

@@ -7,11 +7,10 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-5xl sm:text-7xl font-bold text-white">
-              WE STRUCTURE <span className="text-[#1098D5]">IDEAS</span>
+              ACADEMIC WRITING <span className="text-[#1098D5]">SUPPORT</span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
-              Create Your Success Stories With Our Quality IT Services. See Our
-              Key Expertise Below.
+            Solve structure citation and clarity issues in manuscripts.
             </p>
           </div>
         </div>
@@ -39,7 +38,7 @@ export default function Page() {
               <div className="flex flex-col items-center">
                 <div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
                   <Image
-                    src="/placeholder-icon.png"
+                    src="/spss.png"
                     alt="Literature Review"
                     width={60}
                     height={60}
@@ -47,13 +46,13 @@ export default function Page() {
                   />
                 </div>
                 <span className="text-sm text-gray-600 text-center">
-                  Literature Review
+                  SPSS Analysis
                 </span>
               </div>
               <div className="flex flex-col items-center">
                 <div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
                   <Image
-                    src="/placeholder-icon.png"
+                    src="/STATA.png"
                     alt="Research Papers"
                     width={60}
                     height={60}
@@ -61,13 +60,13 @@ export default function Page() {
                   />
                 </div>
                 <span className="text-sm text-gray-600 text-center">
-                  Research Papers
+                  STATA Analysis
                 </span>
               </div>
               <div className="flex flex-col items-center">
                 <div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
                   <Image
-                    src="/placeholder-icon.png"
+                    src="/EndNote.png"
                     alt="Thesis Writing"
                     width={60}
                     height={60}
@@ -75,13 +74,13 @@ export default function Page() {
                   />
                 </div>
                 <span className="text-sm text-gray-600 text-center">
-                  Thesis Writing
+                  EndNote Citation
                 </span>
               </div>
               <div className="flex flex-col items-center">
                 <div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
                   <Image
-                    src="/placeholder-icon.png"
+                    src="/Turnitin.png"
                     alt="Citation & Formatting"
                     width={60}
                     height={60}
@@ -89,35 +88,7 @@ export default function Page() {
                   />
                 </div>
                 <span className="text-sm text-gray-600 text-center">
-                  Citation & Formatting
-                </span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-                  <Image
-                    src="/placeholder-icon.png"
-                    alt="Peer Review"
-                    width={60}
-                    height={60}
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 text-center">
-                  Peer Review
-                </span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
-                  <Image
-                    src="/placeholder-icon.png"
-                    alt="Data Analysis"
-                    width={60}
-                    height={60}
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-sm text-gray-600 text-center">
-                  Data Analysis
+                  Turnitin Plagiarism
                 </span>
               </div>
             </div>
