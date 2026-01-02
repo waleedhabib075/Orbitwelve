@@ -77,45 +77,6 @@ Linux System Administration: Secure, optimized, and scalable Linux environments 
 				</div>
 			</section>
 
-			{/* Our Latest Projects Section */}
-			<section className="py-16 bg-gray-50">
-				<div className="mx-auto max-w-7xl px-6 lg:px-8">
-					<h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
-						Our Latest Projects
-					</h2>
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-						<div className="bg-white rounded-lg shadow-md overflow-hidden relative">
-							<div className="absolute top-4 left-4 bg-[#1098D5] text-white text-xs font-semibold px-2 py-1 rounded z-10">
-								NEW
-							</div>
-							<div className="w-full h-64 bg-gray-200 flex items-center justify-center">
-								<Image src="/placeholder-project.png" alt="Project 1" width={400} height={300} className="object-cover w-full h-full" />
-							</div>
-						</div>
-						<div className="bg-white rounded-lg shadow-md overflow-hidden">
-							<div className="w-full h-64 bg-gray-200 flex items-center justify-center">
-								<Image src="/placeholder-project.png" alt="Project 2" width={400} height={300} className="object-cover w-full h-full" />
-							</div>
-						</div>
-						<div className="bg-white rounded-lg shadow-md overflow-hidden relative">
-							<div className="absolute top-4 left-4 bg-[#1098D5] text-white text-xs font-semibold px-2 py-1 rounded z-10">
-								NEW
-							</div>
-							<div className="w-full h-64 bg-gray-200 flex items-center justify-center">
-								<Image src="/placeholder-project.png" alt="Project 3" width={400} height={300} className="object-cover w-full h-full" />
-							</div>
-						</div>
-					</div>
-					<div className="text-center">
-						<a
-							href="/projects"
-							className="inline-block bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-4 rounded-md text-lg transition-colors"
-						>
-							VIEW PORTFOLIO
-						</a>
-					</div>
-				</div>
-			</section>
-		</main>
+			</main>
 	);
 }

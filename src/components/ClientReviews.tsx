@@ -10,11 +10,12 @@ interface Review {
   comment: string;
   position?: string;
   rating?: number;
+  imageUrl?: string;
 }
 
 type Country =
   | "all"
-  | "arabia"
+  | "Saudi Arabia"
   | "Australia"
   | "Bahrain"
   | "Belgium"
@@ -71,20 +72,205 @@ type ImageItem = {
   name: string;
   url: string;
   country: string;
+  author?: string;
+  position?: string;
+  comment?: string;
+  rating?: number;
 };
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function ClientReviews() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [supabase, setSupabase] = useState<ReturnType<typeof createClient> | null>(null);
+  
+  // Sample review data to display
+  const sampleReviews: ImageItem[] = [
+    {
+      id: "all",
+      name: "all-reviews.jpg",
+      url: "https://www.playbook.com/e/ghaziii/zq7idsvTL3Zo7miHJc1hdPSG?theme=gallery&assetNumber=3&displaySize=medium",
+      country: "all",
+      author: "All Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "saudi",
+      name: "saudi-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/WqgLZvw1GhcXtnaSEnVAYkhd",
+      country: "Saudi Arabia",
+      author: "Saudi Arabia Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "australia",
+      name: "australia-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/9BaJspXqYmr2wk2e3xfkUKtM",
+      country: "Australia",
+      author: "Australia Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "bahrain",
+      name: "bahrain-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/mzcH23nD4Y9223oue5AF9wwu",
+      country: "Bahrain",
+      author: "Bahrain Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "belgium",
+      name: "belgium-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/78C5giF2cbZrrKFBKBU3Fv4s",
+      country: "Belgium",
+      author: "Belgium Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "canada",
+      name: "canada-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/w6CvvFjBqCsM5gvVEjRi8Dvj",
+      country: "Canada",
+      author: "Canada Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "france",
+      name: "france-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/j79AMjXUo3xc5jaY46AxzQdU",
+      country: "France",
+      author: "France Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "germany",
+      name: "germany-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/8gsYmd7wSKEFLrvCoDcK6xdj",
+      country: "Germany",
+      author: "Germany Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "grenada",
+      name: "grenada-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/3QdtdDtZYeofouFdxHA9nn85",
+      country: "Grenada",
+      author: "Grenada Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "gyana",
+      name: "gyana-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/jTt6no8QNaxREZP5UYtK9aGn",
+      country: "Gyana",
+      author: "Gyana Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "india",
+      name: "india-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/M4MSJpffCC1GdAvcBSKfBgvT",
+      country: "India",
+      author: "India Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "hongkong",
+      name: "hongkong-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/Std2wsMNQSMGqre5kVLqjENJ",
+      country: "Hong Kong",
+      author: "Hong Kong Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "italy",
+      name: "italy-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/hukjaVDk6XhZUSUAuyZHwpvE",
+      country: "Italy",
+      author: "Italy Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "jordan",
+      name: "jordan-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/47ZhKdQEZDSNZDfkXkyxkrZZ",
+      country: "Jordan",
+      author: "Jordan Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "netherlands",
+      name: "netherlands-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/nB6JsKv79R794b475jUsgSQ9",
+      country: "Netherlands",
+      author: "Netherlands Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "pakistan",
+      name: "pakistan-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/3PmYGn8FdnyYgCCDN5pPQteQ",
+      country: "Pakistan",
+      author: "Pakistan Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "panama",
+      name: "panama-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/jdApdkLDmLVEMcuhv3szfsh4",
+      country: "Panama",
+      author: "Panama Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "poland",
+      name: "poland-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/k4d1pUDqAvipkFNogK8qBJnf",
+      country: "Poland",
+      author: "Poland Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "uae",
+      name: "uae-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/QUMaunvsqf667bY5j6ijBmV5",
+      country: "UAE",
+      author: "UAE Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "uk",
+      name: "uk-reviews.jpg",
+      url: "https://playbook.com/s/orbitwelve1/AaQdCRiXZLfEoY3AnE2AT56s",
+      country: "UK",
+      author: "UK Reviews",
+      position: "Client Testimonials"
+    },
+    {
+      id: "usa",
+      name: "usa-reviews.jpg",
+      url: "https://playbook.com/e/orbitwelve1/GXGzBHKyXsmVJ1PjA9oaDKhQ?theme=gallery&assetNumber=3&displaySize=medium",
+      country: "USA",
+      author: "USA Reviews",
+      position: "Client Testimonials"
+    }
+  ];
+  
+  // Initialize Supabase client only on the client side
+  useEffect(() => {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (url && key) {
+      try {
+        setSupabase(createClient(url, key));
+      } catch (err) {
+        console.error("Failed to initialize Supabase:", err);
+      }
+    }
+  }, []);
 
   const countries: Country[] = useMemo(
     () => [
       "all",
-      "arabia",
+      "Saudi Arabia",
       "Australia",
       "Bahrain",
       "Belgium",
@@ -115,6 +301,11 @@ export default function ClientReviews() {
   const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
 
   const listFolderImages = useCallback(async (folder: string) => {
+    if (!supabase) {
+      setError("Supabase is not configured");
+      return [];
+    }
+
     const { data, error } = await supabase.storage.from(BUCKET).list(folder, {
       limit: 200,
       offset: 0,
@@ -149,6 +340,17 @@ export default function ClientReviews() {
     async (country: Country) => {
       setLoading(true);
       setError(null);
+      
+      if (!supabase) {
+        // Use sample data when Supabase is not configured
+        const filteredReviews = country === "all" 
+          ? sampleReviews 
+          : sampleReviews.filter(review => review.country.toLowerCase() === country.toLowerCase());
+        setImages(filteredReviews);
+        setLoading(false);
+        return;
+      }
+
       try {
         if (country === "all") {
           const { data: rootData, error: rootError } = await supabase.storage
@@ -205,112 +407,252 @@ export default function ClientReviews() {
   );
 
   return (
-    <div className="space-y-8 py-16 bg-transparent">
-      {/* 🏷️ Title + Filters */}
-      <div className="text-center mb-12">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6">
-          Client Testimonials
-        </h2>
+    <div className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6">
+            Client Reviews by Country
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Browse client testimonials and project showcases from around the world
+          </p>
+        </div>
 
-        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-3">
+        {/* Country Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
           {countries.map((country) => {
             const isActive = activeCountry === country;
             return (
               <button
                 key={country}
                 onClick={() => setActiveCountry(country)}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200 ${
+                className={`px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-[#1098D5] text-white border-[#1098D5] shadow-sm"
-                    : "bg-transparent text-gray-700 border-gray-300 hover:bg-[#1098D5]/10"
+                    ? "bg-[#1098D5] text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
-                style={{ textTransform: "capitalize" }}
               >
-                {country}
+                {country === "all" ? "All Reviews" : country}
               </button>
             );
           })}
         </div>
+
+        {/* Dynamic Iframe Display */}
+        <div style={{height: "600px"}}>
+          {activeCountry === "Saudi Arabia" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/UeVc4JKEqGPGnRWAR82DhDZj?theme=gallery&assetNumber=3&displaySize=medium"
+              title="arabia - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Australia" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/QQ9ZQFzAP5SSqESz2Zta2zBi?theme=gallery&assetNumber=3&displaySize=medium"
+              title="autralia - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Bahrain" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/XZaJ1kLEtzi14ye7AmbNRTBF?theme=gallery&assetNumber=3&displaySize=medium"
+              title="Bahrain - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Belgium" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/LYH9PZsU6bj92Mauou4aUNV6?theme=gallery&assetNumber=3&displaySize=medium"
+              title="Belgium - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Canada" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/cQWcrNTbs9sYYHMQ4AuSv6pj?theme=gallery&assetNumber=3&displaySize=medium"
+              title="canada - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "France" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/Vvwg6pJUC2EbEbNLtPjunQFy?theme=gallery&assetNumber=3&displaySize=medium"
+              title="france - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Germany" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/VqT2FeJ6dD58w9K7rcW845qa?theme=gallery&assetNumber=3&displaySize=medium"
+              title="germany - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Grenada" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/u3H26wVRUxnm3JiVmKcYh44x?theme=gallery&assetNumber=3&displaySize=medium"
+              title="grenada - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Gyana" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/pd7CMwU9c2vcdHeXk38H38LW?theme=gallery&assetNumber=3&displaySize=medium"
+              title="Gyana - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "India" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/6B5bfQEZZF6udKim49uF8GZF?theme=gallery&assetNumber=3&displaySize=medium"
+              title="india - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Hong Kong" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/t29BSX2Bq2AVQBxiSyYnwt5a?theme=gallery&assetNumber=3&displaySize=medium"
+              title="hong kong - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Italy" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/Za6YrPgNw7KoxxFvjQPmcGut?theme=gallery&assetNumber=3&displaySize=medium"
+              title="italy - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Jordan" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/ERo91jFb9gGfeFSWr4wwr8yu?theme=gallery&assetNumber=3&displaySize=medium"
+              title="Jordan - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Netherlands" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/9ennUWyWaQpAEB5K9o8WqVA8?theme=gallery&assetNumber=3&displaySize=medium"
+              title="Netherlands - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Pakistan" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/qDgkw7FHLjBC9zTAZfEGNVzg?theme=gallery&assetNumber=3&displaySize=medium"
+              title="Pakistan - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Panama" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/1Z9xkWRMBdrPQ9KbtNXhBK7k?theme=gallery&assetNumber=3&displaySize=medium"
+              title="panama - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "Poland" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/q8B5eT15CEEZdXSV6b5P121p?theme=gallery&assetNumber=3&displaySize=medium"
+              title="poland - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "UAE" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/ZnuNvWgD7qGV1z56P8ecjHTF?theme=gallery&assetNumber=3&displaySize=medium"
+              title="uae - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "UK" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/vgiq7RrKJ4L873881KPx9uQ9?theme=gallery&assetNumber=3&displaySize=medium"
+              title="uk - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "USA" && (
+            <iframe 
+              src="https://playbook.com/e/orbitwelve1/GXGzBHKyXsmVJ1PjA9oaDKhQ?theme=gallery&assetNumber=3&displaySize=medium"
+              title="usa - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+          {activeCountry === "all" && (
+            <iframe 
+              src="https://www.playbook.com/e/ghaziii/zq7idsvTL3Zo7miHJc1hdPSG?theme=gallery&assetNumber=3&displaySize=medium"
+              title="all - Playbook.com"
+              sandbox="allow-same-origin allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          )}
+        </div>
       </div>
-
-      {/* Loader */}
-      {loading && (
-        <div className="flex justify-center items-center py-16">
-          <svg
-            className="animate-spin h-8 w-8 text-[#1098D5]"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-            />
-          </svg>
-        </div>
-      )}
-
-      {/* Empty */}
-      {!loading && images.length === 0 && (
-        <div className="text-center text-gray-500 py-16">
-          No images found for "{activeCountry}"
-        </div>
-      )}
-
-      {/* Image Grid */}
-      <AnimatePresence mode="popLayout">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
-          {images.map((img) => (
-            <motion.div
-              key={img.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="rounded-xl hover:shadow-lg transition-transform duration-200 hover:scale-[1.02] overflow-hidden bg-transparent"
-            >
-              <img
-                src={img.url}
-                alt={img.name}
-                className="w-full h-80 object-cover cursor-pointer"
-                loading="lazy"
-                onClick={() => setSelectedImage(img)}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </AnimatePresence>
-
-      {/* Full Size Image Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-4xl max-h-full p-4">
-            <img
-              src={selectedImage.url}
-              alt={selectedImage.name}
-              className="max-w-full max-h-full object-contain"
-            />
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-2 right-2 text-white text-2xl bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-opacity-75"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
