@@ -4,6 +4,7 @@ import FindUsSection from "@/components/FindUsSection";
 import { Hero } from "@/components/heros";
 import OurServices from "@/components/OurServices";
 import PurposeSection from "@/components/PurposeSection";
+import TeamSection from "@/components/TeamSection";
 import { getClients, getProjects, getReviews, getTeam } from "@/lib/public-api";
 
 export default async function Home() {
@@ -28,6 +29,7 @@ export default async function Home() {
       {/* <LatestWorkSection projects={projects} /> */}
       {/* <TeamSection team={team} /> */}
       <FindUsSection />
+      <TeamSection />
       <ContactSection />
     </>
   );

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import ServiceProject from "@/components/ServiceProject";
+import DigitalMarketing from "@/components/DigitalMarketing";
 
 export default function Page() {
 	return (
@@ -10,7 +12,7 @@ export default function Page() {
 							RESULT FOCUSED <span className="text-[#1098D5]">DIGITAL MARKETING</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-						Fix poor online visibility and drive qualified customers.
+							Fix poor online visibility and drive qualified customers.
 						</p>
 					</div>
 				</div>
@@ -29,6 +31,7 @@ export default function Page() {
 							</p>
 						</div>
 
+						{/* Icons Grid */}
 						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
 							<div className="flex flex-col items-center">
 								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
@@ -54,21 +57,44 @@ export default function Page() {
 								</div>
 								<span className="text-sm text-gray-600 text-center">SEM Rush</span>
 							</div>
-							
 						</div>
 
-						<div className="text-center">
-							<a
-								href="/contact"
-								className="inline-block bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-4 rounded-md text-lg transition-colors"
-							>
-								LET'S TALK ABOUT YOUR PROJECT
-							</a>
+						{/* Our Projects Section */}
+						<div className="text-center mb-12">
+							<h3 className="text-2xl font-bold text-gray-900 mb-4">Our Projects</h3>
+							<p className="text-gray-600 max-w-2xl mx-auto">
+								Explore our digital marketing project showcases and portfolio work
+							</p>
+						</div>
+
+						{/* Service Project Component */}
+						<ServiceProject
+							title="Digital Marketing"
+							description="Comprehensive digital marketing strategies including SEO, content marketing, and performance analytics."
+							iframeSrc="https://playbook.com/e/orbitwelve1/yUvQ3DJRgoLZgP5MjWna4SEY?theme=gallery&assetNumber=3&displaySize=medium"
+							iframeTitle="Digital Marketing - Playbook.com"
+						/>
+
+						{/* Relevant Component Data */}
+						<div className="mt-12">
+							<DigitalMarketing />
 						</div>
 					</div>
 				</div>
 			</section>
 
-			</main>
+			<section className="py-16 bg-gray-50">
+				<div className="mx-auto max-w-7xl px-6 lg:px-8">
+					<div className="text-center">
+						<a
+							href="/contact"
+							className="inline-block bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-4 rounded-md text-lg transition-colors"
+						>
+							LET'S TALK ABOUT YOUR PROJECT
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
 	);
 }

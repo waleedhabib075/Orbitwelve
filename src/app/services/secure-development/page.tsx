@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SecureDevelopment from "@/components/SecureDevelopment";
 
 export default function Page() {
 	return (
@@ -7,10 +8,10 @@ export default function Page() {
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
 						<h1 className="text-5xl sm:text-7xl font-bold text-white">
-							SECURE DEVELOPMENT <span className="text-[#1098D5]">SOLUTIION</span>
+							SECURE DEVELOPMENT <span className="text-[#1098D5]">SOLUTION</span>
 						</h1>
 						<p className="mt-6 text-lg leading-8 text-gray-300">
-						Find and fix vulnerabilities before code reaches production.
+							Find and fix vulnerabilities before code reaches production.
 						</p>
 					</div>
 				</div>
@@ -62,18 +63,34 @@ export default function Page() {
 							</div>
 						</div>
 
-						<div className="text-center">
-							<a
-								href="/contact"
-								className="inline-block bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-4 rounded-md text-lg transition-colors"
-							>
-								LET'S TALK ABOUT YOUR PROJECT
-							</a>
+						{/* Our Projects Section */}
+						<div className="text-center mb-12">
+							<h3 className="text-2xl font-bold text-gray-900 mb-4">Our Projects</h3>
+							<p className="text-gray-600 max-w-2xl mx-auto">
+								Explore our secure development project showcases and portfolio work
+							</p>
+						</div>
+
+						{/* Relevant Component Data */}
+						<div className="mt-12">
+							<SecureDevelopment />
 						</div>
 					</div>
 				</div>
 			</section>
 
-			</main>
+			<section className="py-16 bg-gray-50">
+				<div className="mx-auto max-w-7xl px-6 lg:px-8">
+					<div className="text-center">
+						<a
+							href="/contact"
+							className="inline-block bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-4 rounded-md text-lg transition-colors"
+						>
+							LET'S TALK ABOUT YOUR PROJECT
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
 	);
 }
