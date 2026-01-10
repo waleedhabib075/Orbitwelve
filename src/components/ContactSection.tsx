@@ -12,6 +12,11 @@ export default function ContactSection() {
     message: "",
   });
 
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(
+    null
+  );
+
   const services = [
     "Digital Consultancy",
     "Data & Analytics",
@@ -31,19 +36,47 @@ export default function ContactSection() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = encodeURIComponent(
-      `New inquiry from ${formData.name || "Orbitwelve website"}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${
-        formData.phone
-      }\nService: ${formData.service}\n\nMessage:\n${formData.message}`
-    );
+    if (isSending) return;
 
-    window.location.href = `mailto:contact@orbitwelve.com?subject=${subject}&body=${body}`;
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    setIsSending(true);
+    setStatus(null);
+
+    try {
+      const res = await fetch("https://formspree.io/f/xvzglyjk", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: (() => {
+          const fd = new FormData();
+          fd.append("name", formData.name);
+          fd.append("email", formData.email);
+          fd.append("phone", formData.phone);
+          fd.append("service", formData.service);
+          fd.append("message", formData.message);
+          return fd;
+        })(),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        errors?: Array<{ message?: string }>;
+      };
+
+      if (!res.ok) {
+        const errText =
+          data.errors?.[0]?.message || "Failed to send message. Please try again.";
+        setStatus({ type: "error", text: errText });
+        return;
+      }
+
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+      setStatus({ type: "success", text: "Message sent successfully." });
+    } catch {
+      setStatus({ type: "error", text: "Failed to send message. Please try again." });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -172,11 +205,22 @@ export default function ContactSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
+            disabled={isSending}
+            className="bg-[#1098D5] hover:bg-[#0d7fb3] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
           >
-            Send Message
+            {isSending ? "Sending..." : "Send Message"}
           </motion.button>
         </div>
+
+        {status && (
+          <div
+            className={`text-center text-sm font-medium ${
+              status.type === "success" ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {status.text}
+          </div>
+        )}
       </motion.form>
     </section>
   );
