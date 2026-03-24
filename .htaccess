@@ -5,35 +5,47 @@
 </IfModule>
 # php -- END cPanel-generated handler, do not edit
 
-
-# Disable directory listing
-Options -Indexes
+# Disable directory listing (but allow access to files)
+Options -Indexes +FollowSymLinks
 
 # Next.js Static Export Rewrite Rules
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # If file exists, serve it
+  # Allow direct access to files
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # If directory exists and has index.html, serve it
+  # Allow access to directories with index.html
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteCond %{REQUEST_FILENAME}/index.html -f
   RewriteRule ^(.*)$ $1/index.html [L]
 
-  # If directory exists but lacks index.html, fall back to matching .html file
+  # Handle trailing slashes for routes that have .html files: /studio/ -> /studio.html
+  # This handles cases where Next.js generates studio.html instead of studio/index.html
   RewriteCond %{REQUEST_FILENAME} -d
-  RewriteCond %{REQUEST_FILENAME}/index.html !-f
-  RewriteCond %{REQUEST_FILENAME}.html -f
-  RewriteRule ^(.+?)/?$ $1.html [L]
+  RewriteCond %{REQUEST_URI} ^(.+)/$
+  RewriteCond %{DOCUMENT_ROOT}%1.html -f
+  RewriteRule ^(.+)/$ $1.html [L]
 
-  # Try adding .html extension
+  # For blog posts and other routes: try .html extension
+  # /blog/slug -> /blog/slug.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^(.+)$
+  RewriteCond %{DOCUMENT_ROOT}%1.html -f
   RewriteRule ^(.+)$ $1.html [L]
 
+  # Try directory with index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^(.+)$
+  RewriteCond %{DOCUMENT_ROOT}%1/index.html -f
+  RewriteRule ^(.+)$ $1/index.html [L]
+
   # Root
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^$ index.html [L]
 </IfModule>
