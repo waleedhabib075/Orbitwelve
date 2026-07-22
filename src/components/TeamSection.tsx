@@ -7,17 +7,16 @@ export default function TeamSection() {
   const teamMembers = [
     {
       name: "Syed Ghazi",
-      role: "CEO",
+      role: "Founder",
       image: "/ghazi.png",
-      description: "Leading the vision and strategy of Orbitwelve with over 10 years of industry experience."
+      description: "Syed Ghazi is the Founder of Oribitwelve, leading the company’s marketing, social media, and creative direction with a strong focus on brand growth and impactful digital outreach."
     },
     {
       name: "Maryam hassny",
-      role: "Marketing Manager",
-      image: "/manager.png",
-      description: "Driving technical innovation and ensuring excellence in all our development projects."
+      role: "CEO & Co-Founder",
+      image: "/manager.jpeg",
+      description: "Syeda Maryam Hassny is the CEO and Co-Founder of Oribitwelve, leading its vision and growth through innovation, creativity, and results-driven digital solutions."
     },
-    
   ];
 
   return (
