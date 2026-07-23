@@ -7,12 +7,18 @@ export const dataset =
 export const projectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ''
 
+export const hasSanityConfig = Boolean(projectId && dataset)
+
 // Helper function to validate env vars (call this when needed)
 export function assertEnvVars() {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
-    throw new Error('Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID')
+    console.warn('Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID')
+    return false
   }
   if (!process.env.NEXT_PUBLIC_SANITY_DATASET) {
-    throw new Error('Missing environment variable: NEXT_PUBLIC_SANITY_DATASET')
+    console.warn('Missing environment variable: NEXT_PUBLIC_SANITY_DATASET')
+    return false
   }
+
+  return true
 }

@@ -307,17 +307,25 @@ export default function BlogPostClient({ slug, initialPost }: BlogPostClientProp
           </div>
 
           {/* Hero Image */}
-          {post.mainImage && (
-            <div className="mb-8">
-              <Image
-                src={urlFor(post.mainImage).width(1200).height(520).url()}
-                alt={post.mainImage.alt || post.title}
-                width={1200}
-                height={520}
-                className="w-full h-auto rounded-lg"
-              />
-            </div>
-          )}
+          {post.mainImage && (() => {
+            const imageUrl = urlFor(post.mainImage)?.width(1200).height(520).url()
+
+            if (!imageUrl) {
+              return null
+            }
+
+            return (
+              <div className="mb-8">
+                <Image
+                  src={imageUrl}
+                  alt={post.mainImage.alt || post.title}
+                  width={1200}
+                  height={520}
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
+            )
+          })()}
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none">

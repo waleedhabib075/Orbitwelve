@@ -179,12 +179,22 @@ export default function BlogClient() {
                   >
                     {post.mainImage && (
                       <div className="relative w-full h-48">
-                        <Image
-                          src={urlFor(post.mainImage).width(600).height(300).url()}
-                          alt={post.title}
-                          fill
-                          className="object-cover"
-                        />
+                        {(() => {
+                          const imageUrl = urlFor(post.mainImage)?.width(600).height(300).url()
+
+                          if (!imageUrl) {
+                            return null
+                          }
+
+                          return (
+                            <Image
+                              src={imageUrl}
+                              alt={post.title}
+                              fill
+                              className="object-cover"
+                            />
+                          )
+                        })()}
                       </div>
                     )}
                     <div className="p-4 flex-1 flex flex-col">

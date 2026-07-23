@@ -1,5 +1,6 @@
 import { groq } from 'next-sanity'
 import { client } from './client'
+import { hasSanityConfig } from '../env'
 
 /**
  * Example GROQ queries for fetching Sanity data
@@ -87,30 +88,58 @@ export const recentPostsQuery = groq`*[_type == "post"] | order(publishedAt desc
  */
 
 export async function getPosts() {
+  if (!client || !hasSanityConfig) {
+    return []
+  }
+
   return await client.fetch(postsQuery)
 }
 
 export async function getPostBySlug(slug: string) {
+  if (!client || !hasSanityConfig) {
+    return null
+  }
+
   return await client.fetch(postBySlugQuery, { slug })
 }
 
 export async function getPostSlugs() {
+  if (!client || !hasSanityConfig) {
+    return []
+  }
+
   return await client.fetch(postSlugsQuery)
 }
 
 export async function getAuthors() {
+  if (!client || !hasSanityConfig) {
+    return []
+  }
+
   return await client.fetch(authorsQuery)
 }
 
 export async function getCategories() {
+  if (!client || !hasSanityConfig) {
+    return []
+  }
+
   return await client.fetch(categoriesQuery)
 }
 
 export async function getPostsByCategory(categoryId: string) {
+  if (!client || !hasSanityConfig) {
+    return []
+  }
+
   return await client.fetch(postsByCategoryQuery, { categoryId })
 }
 
 export async function getRecentPosts(limit: number = 5) {
+  if (!client || !hasSanityConfig) {
+    return []
+  }
+
   return await client.fetch(recentPostsQuery, { limit })
 }
 

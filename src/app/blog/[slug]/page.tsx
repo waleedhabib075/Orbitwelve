@@ -1,5 +1,6 @@
 import { getPostBySlug, getPostSlugs } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
+import { hasSanityConfig } from '@/sanity/env'
 import type { Metadata } from 'next'
 import BlogPostClient from './BlogPostClient'
 
@@ -9,6 +10,10 @@ type Props = {
 
 // Generate static params for posts that exist at build time
 export async function generateStaticParams() {
+  if (!hasSanityConfig) {
+    return []
+  }
+
   const slugs = await getPostSlugs().catch(() => [])
   return slugs.map((post: { slug: string }) => ({ slug: post.slug }))
 }
@@ -16,6 +21,14 @@ export async function generateStaticParams() {
 // Generate metadata for SEO (optional - will work even if post not found)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
+
+  if (!hasSanityConfig) {
+    return {
+      title: 'Post',
+      description: 'Blog post',
+    }
+  }
+
   try {
     const post = await getPostBySlug(slug).catch(() => null)
     if (!post) {
@@ -54,10 +67,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // Server component that tries to fetch post at build time, but falls back to client-side
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
-  
+
   // Try to fetch post at build time (for static generation)
   // If it fails or post doesn't exist, client component will fetch it
-  const initialPost = await getPostBySlug(slug).catch(() => null)
+  const initialPost = hasSanityConfig
+    ? await getPostBySlug(slug).catch(() => null)
+    : null
 
   return <BlogPostClient slug={slug} initialPost={initialPost} />
 }
