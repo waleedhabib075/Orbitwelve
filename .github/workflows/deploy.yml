@@ -27,8 +27,12 @@ jobs:
           node-version: 20
           cache: npm
 
+      # react-simple-maps@3 declares a peer range that stops at React 18, so a
+      # strict install refuses to resolve against React 19. The local
+      # node_modules was installed the same way; this keeps CI consistent with
+      # it rather than changing the dependency tree.
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       # contact-config.php is gitignored, so it is written here from secrets.
       # It must exist before the build: everything in public/ is copied into
