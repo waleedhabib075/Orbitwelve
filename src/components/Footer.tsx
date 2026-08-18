@@ -36,7 +36,7 @@ export default function Footer() {
 
           <h2 className="text-[#051c27] text-sm font-medium max-w-md leading-relaxed tracking-wide ">
             contact@orbitwelve.com <span className="hidden md:inline"> | </span>
-            03299711113
+            +92 329 9711113
           </h2>
 
           {/* Social Icons */}
