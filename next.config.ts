@@ -2,8 +2,7 @@ import type { NextConfig } from "next";
 import type { Configuration as WebpackConfig } from "webpack";
 
 const nextConfig: NextConfig = {
-  output: "export", // 👈 this replaces `next export`
-  // Exclude API routes from build (they don't work with static export)
+  output: "export",
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
   images: {
     unoptimized: true, // 👈 required for static export
