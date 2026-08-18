@@ -63,9 +63,23 @@ $apiKey = config_value($config, 'RESEND_API_KEY');
  * server's own mail server via mail(). Left unset, we use Resend when a key is
  * present and fall back to PHP mail otherwise.
  */
+$smtpHost = config_value($config, 'SMTP_HOST');
+
 $transport = strtolower(config_value($config, 'MAIL_TRANSPORT', ''));
-if ($transport !== 'resend' && $transport !== 'php') {
-  $transport = $apiKey !== '' ? 'resend' : 'php';
+if (!in_array($transport, ['resend', 'smtp', 'php'], true)) {
+  if ($apiKey !== '') {
+    $transport = 'resend';
+  } elseif ($smtpHost !== '') {
+    $transport = 'smtp';
+  } else {
+    $transport = 'php';
+  }
+}
+
+// Many shared hosts disable mail() outright. Fall back to SMTP rather than
+// failing, when SMTP is configured.
+if ($transport === 'php' && !function_exists('mail') && $smtpHost !== '') {
+  $transport = 'smtp';
 }
 
 if ($transport === 'resend') {
@@ -79,7 +93,14 @@ if ($transport === 'resend') {
     echo json_encode(['ok' => false, 'error' => 'cURL extension is not enabled on server']);
     exit;
   }
+} elseif ($transport === 'smtp') {
+  if ($smtpHost === '') {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => 'Email service is not configured.']);
+    exit;
+  }
 } elseif (!function_exists('mail')) {
+  error_log('[contact.php] mail() is disabled on this server and no SMTP_HOST is configured.');
   http_response_code(500);
   echo json_encode(['ok' => false, 'error' => 'Email is not available on this server.']);
   exit;
@@ -130,6 +151,11 @@ function clean_line($value): string {
   return trim(str_replace(["\r", "\n"], ' ', (string)$value));
 }
 
+/** Character length that does not require the optional mbstring extension. */
+function text_len(string $v): int {
+  return function_exists('mb_strlen') ? mb_strlen($v) : strlen($v);
+}
+
 /** Pull the bare address out of `Name <a@b.com>`, or return it as-is. */
 function extract_address(string $value): string {
   if (preg_match('/<([^>]+)>/', $value, $m)) {
@@ -145,6 +171,118 @@ function encode_header(string $value): string {
     return '=?UTF-8?B?' . base64_encode($value) . '?=';
   }
   return $value;
+}
+
+/** Read one SMTP reply, following multi-line continuations. */
+function smtp_read($socket): string {
+  $reply = '';
+  while (($line = fgets($socket, 1024)) !== false) {
+    $reply .= $line;
+    // A final line has a space in position 4; continuations have a hyphen.
+    if (strlen($line) < 4 || $line[3] === ' ') {
+      break;
+    }
+  }
+  return $reply;
+}
+
+/**
+ * Send one command and require a reply code. Returns '' on success or a
+ * human-readable error.
+ */
+function smtp_cmd($socket, ?string $command, array $expected, string $label): string {
+  if ($command !== null) {
+    fwrite($socket, $command . "\r\n");
+  }
+  $reply = smtp_read($socket);
+  $code = (int)substr($reply, 0, 3);
+  if (!in_array($code, $expected, true)) {
+    return $label . ' failed: ' . trim($reply);
+  }
+  return '';
+}
+
+/**
+ * Deliver a message over authenticated SMTP. Written against raw sockets so
+ * the endpoint stays dependency-free — shared hosting has no Composer.
+ *
+ * Returns '' on success, or an error message for the log.
+ */
+function smtp_send(
+  array $opts,
+  string $envelopeFrom,
+  array $recipients,
+  string $headers,
+  string $body
+): string {
+  $host = $opts['host'];
+  $port = (int)$opts['port'];
+  $secure = strtolower($opts['secure']);
+
+  $transport = $secure === 'ssl' ? 'ssl://' . $host : $host;
+  $context = stream_context_create([
+    'ssl' => ['verify_peer' => true, 'verify_peer_name' => true, 'SNI_enabled' => true],
+  ]);
+
+  $socket = @stream_socket_client(
+    $transport . ':' . $port,
+    $errno,
+    $errstr,
+    15,
+    STREAM_CLIENT_CONNECT,
+    $context
+  );
+
+  if (!$socket) {
+    return "connect to {$host}:{$port} failed: {$errstr} ({$errno})";
+  }
+
+  stream_set_timeout($socket, 15);
+
+  $helo = $opts['helo'] !== '' ? $opts['helo'] : 'localhost';
+
+  if ($err = smtp_cmd($socket, null, [220], 'greeting')) { fclose($socket); return $err; }
+  if ($err = smtp_cmd($socket, 'EHLO ' . $helo, [250], 'EHLO')) { fclose($socket); return $err; }
+
+  if ($secure === 'tls') {
+    if ($err = smtp_cmd($socket, 'STARTTLS', [220], 'STARTTLS')) { fclose($socket); return $err; }
+    if (!@stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+      fclose($socket);
+      return 'TLS negotiation failed';
+    }
+    // The session resets after STARTTLS, so greet again.
+    if ($err = smtp_cmd($socket, 'EHLO ' . $helo, [250], 'EHLO after STARTTLS')) { fclose($socket); return $err; }
+  }
+
+  if ($opts['user'] !== '') {
+    if ($err = smtp_cmd($socket, 'AUTH LOGIN', [334], 'AUTH LOGIN')) { fclose($socket); return $err; }
+    if ($err = smtp_cmd($socket, base64_encode($opts['user']), [334], 'username')) { fclose($socket); return $err; }
+    if ($err = smtp_cmd($socket, base64_encode($opts['pass']), [235], 'password')) { fclose($socket); return $err; }
+  }
+
+  if ($err = smtp_cmd($socket, 'MAIL FROM:<' . $envelopeFrom . '>', [250], 'MAIL FROM')) { fclose($socket); return $err; }
+
+  foreach ($recipients as $rcpt) {
+    $addr = extract_address($rcpt);
+    if ($addr === '') {
+      continue;
+    }
+    if ($err = smtp_cmd($socket, 'RCPT TO:<' . $addr . '>', [250, 251], 'RCPT TO')) { fclose($socket); return $err; }
+  }
+
+  if ($err = smtp_cmd($socket, 'DATA', [354], 'DATA')) { fclose($socket); return $err; }
+
+  // Dot-stuff: a line of just "." would otherwise terminate the message early.
+  $data = $headers . "\r\n\r\n" . $body;
+  $data = preg_replace('/^\./m', '..', $data);
+  fwrite($socket, $data . "\r\n.\r\n");
+
+  if ($err = smtp_cmd($socket, null, [250], 'message body')) { fclose($socket); return $err; }
+
+  @smtp_cmd($socket, 'QUIT', [221], 'QUIT');
+  fclose($socket);
+
+  return '';
 }
 
 $name = clean_line($data['name'] ?? '');
@@ -172,7 +310,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
   exit;
 }
 
-if (mb_strlen($name) > 120 || mb_strlen($phone) > 40 || mb_strlen($service) > 120 || mb_strlen($message) > 5000) {
+if (text_len($name) > 120 || text_len($phone) > 40 || text_len($service) > 120 || text_len($message) > 5000) {
   http_response_code(400);
   echo json_encode(['ok' => false, 'error' => 'One of the fields is too long.']);
   exit;
@@ -241,9 +379,8 @@ if ($transport === 'resend') {
     exit;
   }
 } else {
-  // Hand the message to the server's own mail server. Because the destination
-  // mailbox lives on this same cPanel account, this is a local delivery and
-  // never leaves the box.
+  // Both remaining transports send the same MIME message; they differ only in
+  // how it is handed off.
   $envelope = extract_address($mailFrom);
   if ($envelope === '') {
     error_log('[contact.php] CONTACT_EMAIL_FROM is not a usable address: ' . $mailFrom);
@@ -253,14 +390,7 @@ if ($transport === 'resend') {
   }
 
   $boundary = 'ow-' . bin2hex(random_bytes(12));
-
-  $headers = implode("\r\n", [
-    'From: ' . $mailFrom,
-    'Reply-To: ' . encode_header(str_replace(['<', '>', ',', ';'], ' ', $name)) . ' <' . $email . '>',
-    'MIME-Version: 1.0',
-    'Content-Type: multipart/alternative; boundary="' . $boundary . '"',
-    'X-Mailer: Orbitwelve contact form',
-  ]);
+  $replyTo = encode_header(str_replace(['<', '>', ',', ';'], ' ', $name)) . ' <' . $email . '>';
 
   $body = "--{$boundary}\r\n"
     . "Content-Type: text/plain; charset=UTF-8\r\n"
@@ -269,21 +399,67 @@ if ($transport === 'resend') {
     . "--{$boundary}\r\n"
     . "Content-Type: text/html; charset=UTF-8\r\n"
     . "Content-Transfer-Encoding: 8bit\r\n\r\n"
-    . $html . "\r\n\r\n"
+    . preg_replace('/\R/u', "\r\n", $html) . "\r\n\r\n"
     . "--{$boundary}--\r\n";
 
-  // -f sets the envelope sender so the message passes SPF. Some hosts disable
-  // the parameter, so retry without it rather than failing outright.
-  $sent = @mail(implode(', ', $recipients), encode_header($subject), $body, $headers, '-f' . $envelope);
-  if (!$sent) {
-    $sent = @mail(implode(', ', $recipients), encode_header($subject), $body, $headers);
-  }
+  if ($transport === 'smtp') {
+    // mail() is unavailable or unwanted, so speak SMTP to the mail server
+    // directly using the mailbox credentials.
+    $smtpHeaders = implode("\r\n", [
+      'Date: ' . date('r'),
+      'From: ' . $mailFrom,
+      'To: ' . implode(', ', $recipients),
+      'Reply-To: ' . $replyTo,
+      'Subject: ' . encode_header($subject),
+      'Message-ID: <' . bin2hex(random_bytes(12)) . '@' . (explode('@', $envelope)[1] ?? 'localhost') . '>',
+      'MIME-Version: 1.0',
+      'Content-Type: multipart/alternative; boundary="' . $boundary . '"',
+      'X-Mailer: Orbitwelve contact form',
+    ]);
 
-  if (!$sent) {
-    error_log('[contact.php] mail() returned false for ' . implode(', ', $recipients));
-    http_response_code(502);
-    echo json_encode(['ok' => false, 'error' => 'Failed to send. Please try again.']);
-    exit;
+    $smtpError = smtp_send(
+      [
+        'host' => $smtpHost,
+        'port' => config_value($config, 'SMTP_PORT', '465'),
+        'secure' => config_value($config, 'SMTP_SECURE', 'ssl'),
+        'user' => config_value($config, 'SMTP_USER', $envelope),
+        'pass' => config_value($config, 'SMTP_PASS'),
+        'helo' => config_value($config, 'SMTP_HELO', $_SERVER['SERVER_NAME'] ?? 'localhost'),
+      ],
+      $envelope,
+      $recipients,
+      $smtpHeaders,
+      $body
+    );
+
+    if ($smtpError !== '') {
+      error_log('[contact.php] SMTP ' . $smtpError);
+      http_response_code(502);
+      echo json_encode(['ok' => false, 'error' => 'Failed to send. Please try again.']);
+      exit;
+    }
+  } else {
+    $headers = implode("\r\n", [
+      'From: ' . $mailFrom,
+      'Reply-To: ' . $replyTo,
+      'MIME-Version: 1.0',
+      'Content-Type: multipart/alternative; boundary="' . $boundary . '"',
+      'X-Mailer: Orbitwelve contact form',
+    ]);
+
+    // -f sets the envelope sender so the message passes SPF. Some hosts disable
+    // the parameter, so retry without it rather than failing outright.
+    $sent = @mail(implode(', ', $recipients), encode_header($subject), $body, $headers, '-f' . $envelope);
+    if (!$sent) {
+      $sent = @mail(implode(', ', $recipients), encode_header($subject), $body, $headers);
+    }
+
+    if (!$sent) {
+      error_log('[contact.php] mail() returned false for ' . implode(', ', $recipients));
+      http_response_code(502);
+      echo json_encode(['ok' => false, 'error' => 'Failed to send. Please try again.']);
+      exit;
+    }
   }
 }
 
