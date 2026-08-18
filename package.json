@@ -10,6 +10,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@portabletext/react": "^6.0.2",
     "@react-google-maps/api": "^2.20.7",
     "@sanity/icons": "^3.7.4",

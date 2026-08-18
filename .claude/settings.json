@@ -9,7 +9,18 @@
       "WebSearch",
       "Bash(docker run *)",
       "Bash(npm run *)",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(node -e ' *)",
+      "Bash(gh auth *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git ls-tree *)",
+      "Bash(bash \"/c/Users/walee/AppData/Local/Temp/claude/c--Users-walee-OneDrive-Desktop-Orbitwelve/ace995ce-a544-4753-b763-58eb743003a2/scratchpad/ci-repro.sh\")",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(SP=\"/c/Users/walee/AppData/Local/Temp/claude/c--Users-walee-OneDrive-Desktop-Orbitwelve/ace995ce-a544-4753-b763-58eb743003a2/scratchpad/citest\" && ls \"$SP/node_modules/.bin/\" 2>/dev/null | head -5; echo \"--- next pkg present? ---\"; ls -d \"$SP/node_modules/next\" 2>&1; echo \"--- npm ci tail ---\"; tail -12 \"/c/Users/walee/AppData/Local/Temp/claude/c--Users-walee-OneDrive-Desktop-Orbitwelve/ace995ce-a544-4753-b763-58eb743003a2/tasks/bkuxn1621.output\")",
+      "Read(//c/Users/walee/AppData/Local/Temp/claude/c--Users-walee-OneDrive-Desktop-Orbitwelve/ace995ce-a544-4753-b763-58eb743003a2/scratchpad/citest/node_modules/**)"
     ]
   }
 }

@@ -1,13 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import React, { useState } from "react";
 
-// PHP endpoint shipped in /public — the site is a static export, so there is no
-// Node server for an API route. Override per-environment if the site and the
-// endpoint ever live on different hosts.
-const CONTACT_ENDPOINT =
-  process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/contact.php";
+// EmailJS sends from its own servers, which is what makes this work here: the
+// site is a static export with no backend, and the host blocks outbound SMTP
+// from PHP. These three values are public by design — the account is protected
+// by the allowed-origins list configured in the EmailJS dashboard.
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -47,28 +50,38 @@ export default function ContactSection() {
     e.preventDefault();
     if (isSending) return;
 
+    // Bots fill every field, including the hidden one. Say it worked and drop it.
+    if (formData.company.trim() !== "") {
+      setFormData({ name: "", email: "", phone: "", service: "", message: "", company: "" });
+      setStatus({ type: "success", text: "Message sent successfully." });
+      return;
+    }
+
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setStatus({
+        type: "error",
+        text: "The contact form is not configured yet. Please email us directly.",
+      });
+      return;
+    }
+
     setIsSending(true);
     setStatus(null);
 
     try {
-      const res = await fetch(CONTACT_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = (await res.json().catch(() => ({}))) as {
-        ok?: boolean;
-        error?: string;
-      };
-
-      if (!res.ok || !data.ok) {
-        setStatus({
-          type: "error",
-          text: data.error || "Failed to send message. Please try again.",
-        });
-        return;
-      }
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          reply_to: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
 
       setFormData({
         name: "",
@@ -79,8 +92,15 @@ export default function ContactSection() {
         company: "",
       });
       setStatus({ type: "success", text: "Message sent successfully." });
-    } catch {
-      setStatus({ type: "error", text: "Failed to send message. Please try again." });
+    } catch (err) {
+      const detail =
+        typeof err === "object" && err !== null && "text" in err
+          ? String((err as { text: unknown }).text)
+          : "";
+      setStatus({
+        type: "error",
+        text: detail || "Failed to send message. Please try again.",
+      });
     } finally {
       setIsSending(false);
     }
