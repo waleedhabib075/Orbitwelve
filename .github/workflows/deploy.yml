@@ -2,7 +2,9 @@ name: Build and deploy to cPanel
 
 on:
   push:
-    branches: [main]
+    # teams is the working branch that gets shipped; main has diverged and is
+    # not what runs in production.
+    branches: [teams]
   workflow_dispatch:
 
 # Stop an in-flight deploy if a newer commit lands, so two uploads never
