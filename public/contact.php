@@ -220,8 +220,18 @@ function smtp_send(
   $secure = strtolower($opts['secure']);
 
   $transport = $secure === 'ssl' ? 'ssl://' . $host : $host;
+
+  // Shared hosts often present a certificate for the physical server rather
+  // than mail.<domain>, which fails strict verification. Verification stays on
+  // by default; SMTP_VERIFY=false relaxes it when that mismatch is the cause.
+  $verify = $opts['verify'];
   $context = stream_context_create([
-    'ssl' => ['verify_peer' => true, 'verify_peer_name' => true, 'SNI_enabled' => true],
+    'ssl' => [
+      'verify_peer' => $verify,
+      'verify_peer_name' => $verify,
+      'allow_self_signed' => !$verify,
+      'SNI_enabled' => true,
+    ],
   ]);
 
   $socket = @stream_socket_client(
@@ -425,6 +435,7 @@ if ($transport === 'resend') {
         'user' => config_value($config, 'SMTP_USER', $envelope),
         'pass' => config_value($config, 'SMTP_PASS'),
         'helo' => config_value($config, 'SMTP_HELO', $_SERVER['SERVER_NAME'] ?? 'localhost'),
+        'verify' => strtolower(config_value($config, 'SMTP_VERIFY', 'true')) !== 'false',
       ],
       $envelope,
       $recipients,

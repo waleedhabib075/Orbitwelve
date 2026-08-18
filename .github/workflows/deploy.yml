@@ -48,6 +48,7 @@ jobs:
           SMTP_SECURE: ${{ secrets.SMTP_SECURE || 'ssl' }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_VERIFY: ${{ secrets.SMTP_VERIFY || 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -69,6 +70,7 @@ jobs:
             'SMTP_SECURE' => '$(esc "$SMTP_SECURE")',
             'SMTP_USER' => '$(esc "$SMTP_USER")',
             'SMTP_PASS' => '$(esc "$SMTP_PASS")',
+            'SMTP_VERIFY' => '$(esc "$SMTP_VERIFY")',
             'ALLOWED_ORIGINS' => [
               'https://orbitwelve.com',
               'https://www.orbitwelve.com',
