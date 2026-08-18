@@ -1,10 +1,25 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import ServiceProject from "@/components/ServiceProject";
 import DigitalMarketing from "@/components/DigitalMarketing";
 
+export const metadata = pageMetadata({
+  title: "Digital Marketing Services | Orbitwelve",
+  description:
+    "Paid media, content, and campaign management that turn digital spend into measurable pipeline.",
+  path: "/services/digital-marketing",
+});
+
 export default function Page() {
 	return (
-		<main className="min-h-screen bg-white">
+		<>
+		  <ServiceSchema
+		    name="Digital Marketing Services"
+		    description="Paid media, content, and campaign management that turn digital spend into measurable pipeline."
+		    path="/services/digital-marketing"
+		  />
+		  <main className="min-h-screen bg-white">
 			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
@@ -96,5 +111,6 @@ export default function Page() {
 				</div>
 			</section>
 		</main>
+	  </>
 	);
 }

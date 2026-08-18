@@ -1,3 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Orbitwelve | Digital Innovation & Growth Agency",
+  description:
+    "Orbitwelve builds digital products and growth programmes — web and app development, marketing, SEO, cybersecurity, and data analytics for businesses worldwide.",
+  path: "/",
+});
+
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import FindUsSection from "@/components/FindUsSection";

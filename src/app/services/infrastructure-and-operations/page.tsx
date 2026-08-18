@@ -1,8 +1,23 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
+
+export const metadata = pageMetadata({
+  title: "Infrastructure & Operations | Orbitwelve",
+  description:
+    "Cloud infrastructure, CI/CD, monitoring, and operations that keep production stable and observable.",
+  path: "/services/infrastructure-and-operations",
+});
 
 export default function Page() {
 	return (
-		<main className="min-h-screen bg-white">
+		<>
+		  <ServiceSchema
+		    name="Infrastructure & Operations"
+		    description="Cloud infrastructure, CI/CD, monitoring, and operations that keep production stable and observable."
+		    path="/services/infrastructure-and-operations"
+		  />
+		  <main className="min-h-screen bg-white">
 			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
@@ -78,5 +93,6 @@ Linux System Administration: Secure, optimized, and scalable Linux environments 
 			</section>
 
 			</main>
+	  </>
 	);
 }

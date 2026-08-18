@@ -1,8 +1,23 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
+
+export const metadata = pageMetadata({
+  title: "Web Development Services | Orbitwelve",
+  description:
+    "Custom websites and web applications built for performance, accessibility, and search visibility.",
+  path: "/services/web-development",
+});
 
 export default function Page() {
 	return (
-		<main className="min-h-screen bg-white">
+		<>
+		  <ServiceSchema
+		    name="Web Development Services"
+		    description="Custom websites and web applications built for performance, accessibility, and search visibility."
+		    path="/services/web-development"
+		  />
+		  <main className="min-h-screen bg-white">
 			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
@@ -93,5 +108,6 @@ export default function Page() {
 			</section>
 
 			</main>
+	  </>
 	);
 }

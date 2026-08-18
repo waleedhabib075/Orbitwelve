@@ -1,8 +1,23 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
+
+export const metadata = pageMetadata({
+  title: "Social Media Management | Orbitwelve",
+  description:
+    "Channel strategy, content production, scheduling, and community management across social platforms.",
+  path: "/services/social-media-management",
+});
 
 export default function Page() {
 	return (
-		<main className="min-h-screen bg-white">
+		<>
+		  <ServiceSchema
+		    name="Social Media Management"
+		    description="Channel strategy, content production, scheduling, and community management across social platforms."
+		    path="/services/social-media-management"
+		  />
+		  <main className="min-h-screen bg-white">
 			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
@@ -76,5 +91,6 @@ export default function Page() {
 			</section>
 
 			</main>
+	  </>
 	);
 }

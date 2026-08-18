@@ -1,9 +1,24 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import SecureDevelopment from "@/components/SecureDevelopment";
 
+export const metadata = pageMetadata({
+  title: "Secure Development Services | Orbitwelve",
+  description:
+    "Security built into the software lifecycle — secure architecture, code review, and hardened deployment.",
+  path: "/services/secure-development",
+});
+
 export default function Page() {
 	return (
-		<main className="min-h-screen bg-white">
+		<>
+		  <ServiceSchema
+		    name="Secure Development Services"
+		    description="Security built into the software lifecycle — secure architecture, code review, and hardened deployment."
+		    path="/services/secure-development"
+		  />
+		  <main className="min-h-screen bg-white">
 			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
@@ -92,5 +107,6 @@ export default function Page() {
 				</div>
 			</section>
 		</main>
+	  </>
 	);
 }

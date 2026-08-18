@@ -1,8 +1,23 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
+
+export const metadata = pageMetadata({
+  title: "SEO Management Services | Orbitwelve",
+  description:
+    "Technical SEO, content strategy, and link acquisition that grow organic search visibility and qualified traffic.",
+  path: "/services/seo-management",
+});
 
 export default function Page() {
 	return (
-		<main className="min-h-screen bg-white">
+		<>
+		  <ServiceSchema
+		    name="SEO Management Services"
+		    description="Technical SEO, content strategy, and link acquisition that grow organic search visibility and qualified traffic."
+		    path="/services/seo-management"
+		  />
+		  <main className="min-h-screen bg-white">
 			{/* Hero Section */}
 			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -81,5 +96,6 @@ export default function Page() {
 			</section>
 
 			</main>
+	  </>
 	);
 }

@@ -1,8 +1,23 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
+
+export const metadata = pageMetadata({
+  title: "Graphic Design Services | Orbitwelve",
+  description:
+    "Brand identity, marketing collateral, and digital design assets produced to a consistent visual system.",
+  path: "/services/graphic-designing",
+});
 
 export default function Page() {
 	return (
-		<main className="min-h-screen bg-white">
+		<>
+		  <ServiceSchema
+		    name="Graphic Design Services"
+		    description="Brand identity, marketing collateral, and digital design assets produced to a consistent visual system."
+		    path="/services/graphic-designing"
+		  />
+		  <main className="min-h-screen bg-white">
 			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="mx-auto max-w-3xl text-center">
@@ -81,5 +96,6 @@ export default function Page() {
 			</section>
 
 			</main>
+	  </>
 	);
 }
