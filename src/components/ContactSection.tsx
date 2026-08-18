@@ -3,6 +3,12 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 
+// PHP endpoint shipped in /public — the site is a static export, so there is no
+// Node server for an API route. Override per-environment if the site and the
+// endpoint ever live on different hosts.
+const CONTACT_ENDPOINT =
+  process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/contact.php";
+
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
@@ -10,6 +16,7 @@ export default function ContactSection() {
     phone: "",
     service: "",
     message: "",
+    company: "", // honeypot — real users never see or fill this
   });
 
   const [isSending, setIsSending] = useState(false);
@@ -44,33 +51,33 @@ export default function ContactSection() {
     setStatus(null);
 
     try {
-      const res = await fetch("https://formspree.io/f/xvzglyjk", {
+      const res = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: (() => {
-          const fd = new FormData();
-          fd.append("name", formData.name);
-          fd.append("email", formData.email);
-          fd.append("phone", formData.phone);
-          fd.append("service", formData.service);
-          fd.append("message", formData.message);
-          return fd;
-        })(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
       const data = (await res.json().catch(() => ({}))) as {
         ok?: boolean;
-        errors?: Array<{ message?: string }>;
+        error?: string;
       };
 
-      if (!res.ok) {
-        const errText =
-          data.errors?.[0]?.message || "Failed to send message. Please try again.";
-        setStatus({ type: "error", text: errText });
+      if (!res.ok || !data.ok) {
+        setStatus({
+          type: "error",
+          text: data.error || "Failed to send message. Please try again.",
+        });
         return;
       }
 
-      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+        company: "",
+      });
       setStatus({ type: "success", text: "Message sent successfully." });
     } catch {
       setStatus({ type: "error", text: "Failed to send message. Please try again." });
@@ -112,6 +119,20 @@ export default function ContactSection() {
         viewport={{ once: true }}
         className="w-full max-w-3xl bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-100 space-y-6"
       >
+        {/* Honeypot: hidden from users, bots fill it and get silently dropped */}
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="company">Company</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            value={formData.company}
+            onChange={handleChange}
+          />
+        </div>
+
         {/* Name + Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>

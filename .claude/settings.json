@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -l public/contact.php)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(command -v composer)",
+      "WebFetch(domain:resend.com)",
+      "WebSearch",
+      "Bash(docker run *)",
+      "Bash(npm run *)",
+      "Bash(git mv *)"
+    ]
+  }
+}
