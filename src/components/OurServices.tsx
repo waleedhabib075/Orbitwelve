@@ -1,97 +1,91 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 const services = [
   {
-    title: "Digital Consultancy",
-    icon: "/digital-consultancy.png",
-    items: [
-      "Digital Strategy",
-      "Digital Audit",
-      "Digital Training",
-      "Digital Workshops",
-      "Marketing Frameworks",
-      "Onboarding Digital Structures",
-    ],
+    title: "Social Media Management",
+    slug: "social-media-management",
+    icon: "/socialmedia.png",
+    blurb:
+      "Build your brand’s voice and grow your community with full-funnel social media management.",
   },
   {
-    title: "Data & Analytics",
-    icon: "/data-analytics.png",
-    items: [
-      "Market Insights",
-      "Industry Research",
-      "Consumer Behavior",
-      "Audience Profiling",
-      "Competitive Analysis",
-      "Dashboard Services",
-    ],
+    title: "Digital Marketing",
+    slug: "digital-marketing",
+    icon: "/digitalmarketing.png",
+    blurb:
+      "From PPC and content to automation and funnels—attract, convert, and retain customers.",
   },
   {
-    title: "Social Media Marketing",
-    icon: "/social-media.png",
-    items: [
-      "Social Media Strategy",
-      "Channel Optimization",
-      "Influencer Marketing",
-      "Community Management",
-      "Social Media Campaigns",
-      "Advertising",
-    ],
+    title: "Android App Development",
+    slug: "android-app-development",
+    icon: "/andoriddev.png",
+    blurb:
+      "Secure, scalable, and user-friendly Android applications optimized for speed and UX.",
   },
   {
-    title: "DevOps: Web & App",
-    icon: "/devops.png",
-    items: [
-      "UI/UX Design",
-      "Platform Development",
-      "Hosting & Maintenance",
-      "Content Development",
-      "Automation",
-    ],
+    title: "Web Development",
+    slug: "web-development",
+    icon: "/webdev.png",
+    blurb:
+      "Modern, responsive, SEO-ready websites with end-to-end performance optimization.",
   },
   {
-    title: "Search Marketing",
-    icon: "/search.png",
-    items: [
-      "SEO Strategy",
-      "Keyword Analysis",
-      "Content Optimization",
-      "App Store Optimization",
-      "Google My Business",
-    ],
+    title: "Graphic Designing",
+    slug: "graphic-designing",
+    icon: "/graphic.png",
+    blurb:
+      "Logos, brand kits, campaigns, and UI/UX that deliver a memorable brand presence.",
   },
   {
-    title: "Paid Media",
-    icon: "/paid-media.png",
-    items: [
-      "Media Strategy",
-      "Media Planning",
-      "Media Buying",
-      "Reporting & Analytics",
-      "Special Ad Execution",
-    ],
+    title: "Video Editing",
+    slug: "video-editing",
+    icon: "/videoedit.png",
+    blurb:
+      "Corporate videos, product reels, promos, and motion graphics aligned to your story.",
   },
   {
-    title: "Content Creation",
-    icon: "/content.png",
-    items: [
-      "Integrated Campaigns",
-      "Copywriting",
-      "Design Execution",
-      "Animation",
-      "Photography",
-    ],
+    title: "Academic Research Writing",
+    slug: "academic-research-writing",
+    icon: "/research.png",
+    blurb:
+      "From literature reviews to journal-ready manuscripts—structured and compliant.",
   },
   {
-    title: "Branding",
-    icon: "/branding.png",
-    items: [
-      "Brand Strategy",
-      "Identity Design",
-      "Brand Guidelines",
-      "Messaging Collateral",
-      "Newsletters",
-    ],
+    title: "SEO Management",
+    slug: "seo-management",
+    icon: "/seo.png",
+    blurb:
+      "Rank higher with data-driven keyword research, on-page optimization, and backlinks.",
+  },
+  {
+    title: "Lead Generation",
+    slug: "lead-generation",
+    icon: "/leadGen.png",
+    blurb:
+      "Automation, analytics, and creative funnels to acquire qualified leads efficiently.",
+  },
+  {
+    title: "Cybersecurity & Intelligence",
+    slug: "cybersecurity-and-intelligence",
+    icon: "/cyber.png",
+    blurb:
+      "OSINT, forensics, VAPT, and research writing to protect what matters most.",
+  },
+  {
+    title: "Infrastructure & Operations",
+    slug: "infrastructure-and-operations",
+    icon: "/INFRASTRUCTURE.png",
+    blurb:
+      "IT support, network security, and Linux administration for a reliable backbone.",
+  },
+  {
+    title: "Secure Development",
+    slug: "secure-development",
+    icon: "/securedev.png",
+    blurb:
+      "Secure full-stack development and AI in cybersecurity for next‑gen defense.",
   },
 ];
 
@@ -106,9 +100,10 @@ export default function OurServices() {
 
         <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {services.map((service) => (
-            <div
+            <Link
               key={service.title}
-              className="group bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              href={`/services/${service.slug}`}
+              className="group bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-left"
             >
               <div className="flex justify-center mb-6">
                 <Image
@@ -119,17 +114,13 @@ export default function OurServices() {
                   className="group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 text-center">
                 {service.title}
               </h3>
-              <ul className="space-y-2 text-sm text-gray-600">
-                {service.items.map((item) => (
-                  <li key={item} className="flex justify-center">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <p className="text-sm text-gray-600 text-center">
+                {service.blurb}
+              </p>
+            </Link>
           ))}
         </div>
       </div>

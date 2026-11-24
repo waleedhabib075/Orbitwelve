@@ -1,4 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import OurServices from "@/components/OurServices";
+
+export const metadata = pageMetadata({
+  title: "Services | Orbitwelve",
+  description:
+    "Full-service digital delivery: web and mobile development, digital marketing, SEO, cybersecurity, infrastructure, design, and research writing.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

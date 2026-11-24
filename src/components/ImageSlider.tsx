@@ -1,62 +1,43 @@
 "use client";
-import { useState, useEffect, JSX } from "react";
-import Image from "next/image";
-import { StaticImageData } from "next/image";
-import hero from "../../public/hero.jpg";
-import branding from "../../public/branding.png";
-import content from "../../public/content.png";
+import Image, { StaticImageData } from "next/image";
+import { useEffect, useState } from "react";
 
-// Interface for image data
-interface ImageData {
-  src: StaticImageData;
-  alt: string;
-}
+import hero1 from "../../public/hero1.webp";
+import hero2 from "../../public/hero2.webp";
+import hero3 from "../../public/hero3.webp";
 
-// Image data array
-const images: ImageData[] = [
-  {
-    src: hero,
-    alt: "Hero image 1"
-  },  
-  {
-    src:  hero,
-    alt: "Branding services"
-  },
-  {
-    src: hero,
-    alt: "Content creation"
-  },
-];
+const slides: StaticImageData[] = [hero1, hero2, hero3];
+const SLIDE_INTERVAL_MS = 5000;
 
-export default function ImageSlider(): JSX.Element {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isHovered, setIsHovered] = useState<boolean>(false);
+export default function ImageSlider() {
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
-    if (!isHovered) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [isHovered]);
+    const timer = setInterval(() => {
+      setActive((index) => (index + 1) % slides.length);
+    }, SLIDE_INTERVAL_MS);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full">
-      <div
-        className="relative w-full h-full"
-        onMouseOver={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <Image
-          src={images[currentIndex].src}
-          alt={images[currentIndex].alt}
-          fill
-          style={{ objectFit: "cover" }}
-          className="transition-opacity duration-1000 ease-in-out"
-          priority
-        />
-      </div>
+    <div className="absolute inset-0 h-full w-full">
+      {slides.map((image, index) => (
+        <div
+          key={image.src}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === active ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Image
+            src={image}
+            alt="Hero background"
+            fill
+            style={{ objectFit: "cover" }}
+            priority={index === 0}
+          />
+        </div>
+      ))}
     </div>
   );
 }

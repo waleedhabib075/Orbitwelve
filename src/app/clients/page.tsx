@@ -1,5 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import ClientMap from "@/components/ClientMap";
 import ClientReviews from "@/components/ClientReviews";
+
+export const metadata = pageMetadata({
+  title: "Our Clients | Orbitwelve",
+  description:
+    "The businesses and organisations Orbitwelve works with, and the regions we deliver into.",
+  path: "/clients",
+});
 
 // Sample reviews data
 const sampleReviews = [

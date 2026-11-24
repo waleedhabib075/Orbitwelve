@@ -1,7 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import React, { useState } from "react";
+
+// EmailJS sends from its own servers, which is what makes this work here: the
+// site is a static export with no backend, and the host blocks outbound SMTP
+// from PHP. These three values are public by design — the account is protected
+// by the allowed-origins list configured in the EmailJS dashboard.
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -10,7 +19,13 @@ export default function ContactSection() {
     phone: "",
     service: "",
     message: "",
+    company: "", // honeypot — real users never see or fill this
   });
+
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(
+    null
+  );
 
   const services = [
     "Digital Consultancy",
@@ -31,11 +46,64 @@ export default function ContactSection() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you! We’ll get in touch soon.");
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    if (isSending) return;
+
+    // Bots fill every field, including the hidden one. Say it worked and drop it.
+    if (formData.company.trim() !== "") {
+      setFormData({ name: "", email: "", phone: "", service: "", message: "", company: "" });
+      setStatus({ type: "success", text: "Message sent successfully." });
+      return;
+    }
+
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setStatus({
+        type: "error",
+        text: "The contact form is not configured yet. Please email us directly.",
+      });
+      return;
+    }
+
+    setIsSending(true);
+    setStatus(null);
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          reply_to: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+        company: "",
+      });
+      setStatus({ type: "success", text: "Message sent successfully." });
+    } catch (err) {
+      const detail =
+        typeof err === "object" && err !== null && "text" in err
+          ? String((err as { text: unknown }).text)
+          : "";
+      setStatus({
+        type: "error",
+        text: detail || "Failed to send message. Please try again.",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -71,6 +139,20 @@ export default function ContactSection() {
         viewport={{ once: true }}
         className="w-full max-w-3xl bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-100 space-y-6"
       >
+        {/* Honeypot: hidden from users, bots fill it and get silently dropped */}
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="company">Company</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            value={formData.company}
+            onChange={handleChange}
+          />
+        </div>
+
         {/* Name + Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -164,11 +246,22 @@ export default function ContactSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             type="submit"
-            className="bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
+            disabled={isSending}
+            className="bg-[#1098D5] hover:bg-[#0d7fb3] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-8 py-3 rounded-md shadow-md transition-all duration-300"
           >
-            Send Message
+            {isSending ? "Sending..." : "Send Message"}
           </motion.button>
         </div>
+
+        {status && (
+          <div
+            className={`text-center text-sm font-medium ${
+              status.type === "success" ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {status.text}
+          </div>
+        )}
       </motion.form>
     </section>
   );

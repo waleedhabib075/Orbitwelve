@@ -1,0 +1,72 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
+import Image from "next/image";
+
+export const metadata = pageMetadata({
+  title: "Lead Generation Services | Orbitwelve",
+  description:
+    "Outbound and inbound lead programmes, list building, and qualification that fill the top of your funnel.",
+  path: "/services/lead-generation",
+});
+
+export default function Page() {
+	return (
+		<>
+		  <ServiceSchema
+		    name="Lead Generation Services"
+		    description="Outbound and inbound lead programmes, list building, and qualification that fill the top of your funnel."
+		    path="/services/lead-generation"
+		  />
+		  <main className="min-h-screen bg-white">
+			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
+				<div className="mx-auto max-w-7xl px-6 lg:px-8">
+					<div className="mx-auto max-w-3xl text-center">
+						<h1 className="text-5xl sm:text-7xl font-bold text-white">
+							TARGETED <span className="text-[#1098D5]">LEAD GENERATION</span>
+						</h1>
+						<p className="mt-6 text-lg leading-8 text-gray-300">
+						Replace cold guessing with qualified ready to talk.
+						</p>
+					</div>
+				</div>
+				<div className="absolute bottom-0 left-0 right-0 h-1 bg-[#1098D5]"></div>
+			</section>
+
+			<section className="py-16 bg-gray-50">
+				<div className="mx-auto max-w-7xl px-6 lg:px-8">
+					<div className="mx-auto max-w-4xl">
+						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">
+							LEAD GENERATION
+						</h2>
+						<div className="text-gray-700 leading-relaxed space-y-4 text-center mb-12">
+							<p>
+								We combine automation, analytics, and creative funnels to attract qualified leads. Orbitwelve's targeted campaigns across multiple channels ensure you connect with decision-makers and grow your customer base efficiently. Our data-driven approach identifies high-value prospects and nurtures them through personalized engagement strategies.
+							</p>
+						</div>
+
+						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/n8n.png" alt="Automation" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">n8n</span>
+							</div>
+						
+						</div>
+
+						<div className="text-center">
+							<a
+								href="/contact"
+								className="inline-block bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-4 rounded-md text-lg transition-colors"
+							>
+								LET'S TALK ABOUT YOUR PROJECT
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			</main>
+	  </>
+	);
+}

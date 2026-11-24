@@ -1,0 +1,98 @@
+import ServiceSchema from "@/components/ServiceSchema";
+import { pageMetadata } from "@/lib/seo";
+import Image from "next/image";
+
+export const metadata = pageMetadata({
+  title: "Infrastructure & Operations | Orbitwelve",
+  description:
+    "Cloud infrastructure, CI/CD, monitoring, and operations that keep production stable and observable.",
+  path: "/services/infrastructure-and-operations",
+});
+
+export default function Page() {
+	return (
+		<>
+		  <ServiceSchema
+		    name="Infrastructure & Operations"
+		    description="Cloud infrastructure, CI/CD, monitoring, and operations that keep production stable and observable."
+		    path="/services/infrastructure-and-operations"
+		  />
+		  <main className="min-h-screen bg-white">
+			<section className="bg-[#1f1f1f] py-24 sm:py-32 relative">
+				<div className="mx-auto max-w-7xl px-6 lg:px-8">
+					<div className="mx-auto max-w-3xl text-center">
+						<h1 className="text-5xl sm:text-7xl font-bold text-white">
+							STABLE INFRASTRUCTURE <span className="text-[#1098D5]">OPERATIONS</span>
+						</h1>
+						<p className="mt-6 text-lg leading-8 text-gray-300">
+						Prevent downtime with monitored scalable cloud ready systems.
+						</p>
+					</div>
+				</div>
+				<div className="absolute bottom-0 left-0 right-0 h-1 bg-[#1098D5]"></div>
+			</section>
+
+			<section className="py-16 bg-gray-50">
+				<div className="mx-auto max-w-7xl px-6 lg:px-8">
+					<div className="mx-auto max-w-4xl">
+						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">
+							INFRASTRUCTURE & OPERATIONS
+						</h2>
+						<div className="text-gray-700 leading-relaxed space-y-4 text-center mb-12">
+							<p>
+							Reliable IT backbone for sustainable growth. Our services include:
+IT Support: Continuous assistance to maintain uptime and performance.
+Network Security: Firewalls, threat detection, and protection systems for business continuity.
+Linux System Administration: Secure, optimized, and scalable Linux environments managed by certified professionals.
+							</p>
+						</div>
+
+						<div className="grid grid-cols-3 md:grid-cols-6 gap-8 mb-12 justify-items-center">
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/linux.png" alt="IT Support" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Linux</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Kubernetes.png" alt="Network Security" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Kubernetes</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Ngnix.png" alt="Linux Admin" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Ngnix</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Grafana.png" alt="Cloud Services" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Grafana</span>
+							</div>
+							<div className="flex flex-col items-center">
+								<div className="w-20 h-20 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center mb-2">
+									<Image src="/Windows.png" alt="Monitoring" width={60} height={60} className="object-contain" />
+								</div>
+								<span className="text-sm text-gray-600 text-center">Windows</span>
+							</div>
+						</div>
+
+						<div className="text-center">
+							<a
+								href="/contact"
+								className="inline-block bg-[#1098D5] hover:bg-[#0d7fb3] text-white font-semibold px-8 py-4 rounded-md text-lg transition-colors"
+							>
+								LET'S TALK ABOUT YOUR PROJECT
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			</main>
+	  </>
+	);
+}
